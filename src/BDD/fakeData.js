@@ -144,7 +144,7 @@ export const fakeData = [
           "photo": "url/src",
           "price": 100,
           "summary":"Resumen para la card ver cantidad maxima de letras",
-          "description": "PEGA MAS, MUCHO MAS, que padrastro borracho PEGA MAS, MUCHO MAS, que padrastro borracho",
+          "description": "Resumen para la card ver cantidad maxima de letrasResumen para la card ver cantidad maxima de letrasResumen para la card ver cantidad maxima de letrasResumen para la card ver cantidad maxima de letras Resumen para la card ver cantidad maxima de letras",
           "specsTecs": "Especificaciones técnicas"
         }
 

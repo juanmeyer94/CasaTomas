@@ -274,7 +274,7 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy' onClick={() => clickDoubleFilter("Elasticos Afelpados")}>Elásticos Afelpados</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy' oonClick={() => clickDoubleFilter("Elasticos Bretel")}>Elásticos Bretel</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy' onClick={() => clickDoubleFilter("Elasticos Bretel")}>Elásticos Bretel</button>
                 </li>
                 <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy' onClick={() => clickDoubleFilter("Elasticos Quebrados")}>Elásticos Quebrados</button>
@@ -448,5 +448,3 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
 };
 
 export default SideBar;
-
-
