@@ -1,8 +1,15 @@
 import * as ActionTypes from "./actions-types"
 import { fakeData } from "../BDD/fakeData";
+
+
+
 const initialState = {
+    user: null,
+    error: null,
+    isLoggedIn: false,
     items: fakeData,
     filteredItems: [],
+
 }
 
 const reducer = (state = initialState, action) => {
@@ -42,7 +49,7 @@ const reducer = (state = initialState, action) => {
             const targetType = action.payload.types?.toLowerCase().trim();
 
             if (!targetType) {
-                
+
                 return state;
             }
 
@@ -55,8 +62,29 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 filteredItems: doubleFilteredItems,
             };
-
-
+        case ActionTypes.LOGIN_USER_SUCCESS:
+            return {
+                ...state,
+                user: action.payload,
+                error: null,
+            };
+        case ActionTypes.LOGIN_USER_FAILURE:
+            return {
+                ...state,
+                user: null,
+                error: action.payload,
+            };
+        case ActionTypes.LOGOUT_USER:
+            return {
+                ...state,
+                isLoggedIn: false,
+                user: null,
+            };
+        case ActionTypes.SET_LOGGED_IN:
+            return {
+                ...state,
+                isLoggedIn: action.payload,
+            };
         default:
             return state;
     }

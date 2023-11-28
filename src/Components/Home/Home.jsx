@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import { getAllItems, filterItems } from "../../redux/actions";
+import {  filterItems } from "../../redux/actions";
 
 
 
@@ -10,7 +10,7 @@ import Carousel from "../Carousel/Carousel";
 import SideBar from "../SideBar/SideBar";
 import CardsContainer from "../CardsContainer/CardsContainer";
 import Footer from "../Footer/Footer";
-import { fakeData } from "../../BDD/fakeData";
+
 
 
 const Home = () => {
