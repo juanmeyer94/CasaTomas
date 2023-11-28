@@ -6,7 +6,12 @@ export default {
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage:{
+        "merceriadashboard": "url('./src/assets/merceria.jpg')",
+        "maquinadashboard": "url('./src/assets/MaquinaDash.png')"
+      }
+    },
   },
   plugins: [
     require('flowbite/plugin'),
