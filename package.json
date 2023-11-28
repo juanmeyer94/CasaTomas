@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@iconscout/unicons": "^4.0.8",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "flowbite": "^2.1.1",
@@ -22,7 +23,8 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "swiper": "^11.0.4",
-    "tw-elements-react": "^1.0.0-alpha2"
+    "tw-elements-react": "^1.0.0-alpha2",
+    "unicons": "^0.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
