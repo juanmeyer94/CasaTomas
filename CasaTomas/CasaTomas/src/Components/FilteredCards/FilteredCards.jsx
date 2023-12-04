@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "../Card/Card";
 
-const FilteredCards = ({ filteredData }) => {
+const FilteredCards = ({ filteredData, closeFullCard, FullCardData, openFullCard }) => {
   const cardsPerPageLarge = 15;
   const cardsPerPageSmall = 7;
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,6 +33,7 @@ const FilteredCards = ({ filteredData }) => {
             className={`col-start-${(index % 5) + 1} row-start-${Math.floor(
               index / 5
             ) + 1}`}
+            openFullCard={() => openFullCard(item.id ? item.id : item._id)}
           />
         ))}
       </div>

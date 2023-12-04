@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 
+  
 const itemSchema = new mongoose.Schema({
     marca: String,
     name: String,
-    photo: String,
-    price: Number,
+    photo: [String],
+    price: String,
     summary: String,
     description: String,
     specsTecs: String,

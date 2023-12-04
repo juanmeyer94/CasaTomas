@@ -53,7 +53,7 @@ const OfferCarousel = ({ items, renderItem, itemsPerPageLarge = 5, itemsPerPageS
           </button>
         </div>
       </div>
-      <div className="text-center mt-4">
+      <div className="text-center mt-4 mb-4">
         <span className="text-gray-500">{currentPage + 1} / {totalPages}</span>
       </div>
     </div>

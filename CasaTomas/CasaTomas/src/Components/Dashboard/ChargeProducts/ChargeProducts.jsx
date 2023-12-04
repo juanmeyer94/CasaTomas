@@ -103,16 +103,16 @@ const ChargeProducts = () => {
     subsection: "",
     filter: false,
     data: {
-      type: "",
+      type: "Aqui falla",
       items: [
         {
           marca: "",
           name: "",
-          photo: "",
-          price: 0,
+          photo: [],
+          price: "",
           summary: "",
           description: "",
-          specsTecs: "",
+          specsTecs: "asda",
         },
       ],
     },
@@ -258,10 +258,34 @@ const ChargeProducts = () => {
     console.log(initialState)
    }
  
+   const handleImageUpload = (newUrl) => {
+    setInitialState((prevInitialState) => {
+      const updatedItems = prevInitialState.data.items.map((item, index) => {
+        if (index === 0) {
+          
+          return {
+            ...item,
+            photo: [...item.photo, newUrl],
+          };
+        }
+        return item;
+      });
+  
+      return {
+        ...prevInitialState,
+        data: {
+          ...prevInitialState.data,
+          items: updatedItems,
+        },
+      };
+    });
+  };
+  
+  
 
-  console.log(initialState.subsection)
+
   return (
-    <div className="grid grid-cols-12 gap-4 justify-center">
+    <div className="grid grid-cols-12 gap-4 justify-center lg:ml-60 my-4">
       {!showCard ? (
         <>
           {!initialState.section ? (
@@ -325,7 +349,7 @@ const ChargeProducts = () => {
           )}
         </>
       ) : (
-       <DataItemCards initialState={initialState} setInitialState={setInitialState} />
+       <DataItemCards initialState={initialState} setInitialState={setInitialState} onImageUpload={handleImageUpload} />
       )}
     </div>
   );

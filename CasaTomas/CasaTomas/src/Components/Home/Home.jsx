@@ -1,7 +1,7 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
 
-import {  filterItems } from "../../redux/actions";
+import {  filterItems, getAllItemsBdd } from "../../redux/actions";
 
 
 
@@ -17,6 +17,7 @@ const Home = () => {
 
 const dispatch = useDispatch();
 const data = useSelector(state => state.items);
+const [loading, setLoading] = useState(false)
 
 //Filtros
 const filteredData = useSelector((state) => state.filteredItems);
@@ -37,6 +38,8 @@ const filteredData = useSelector((state) => state.filteredItems);
   const falseOffers = () => {
     setShowOffers(false)
   }
+
+  
 
   return (
     <div className="h-full w-full bg-white" >

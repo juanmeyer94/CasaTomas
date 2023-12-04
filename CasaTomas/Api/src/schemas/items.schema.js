@@ -3,8 +3,8 @@ import {z} from "zod"
 const itemSchema = z.object({
     marca: z.string().optional(),
     name: z.string().optional(),
-    photo: z.string().optional(),
-    price: z.number().optional(),
+    photo: z.array(z.string()).optional(),
+    price: z.string().optional(),
     summary: z.string().optional(),
     description: z.string().optional(),
     specsTecs: z.string().optional(),

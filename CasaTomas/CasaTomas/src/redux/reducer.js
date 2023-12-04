@@ -2,12 +2,11 @@ import * as ActionTypes from "./actions-types"
 import { fakeData } from "../BDD/fakeData";
 
 
-
 const initialState = {
     user: null,
     error: null,
     isLoggedIn: false,
-    items: fakeData,
+    items: [],
     filteredItems: [],
 
 }
@@ -17,7 +16,7 @@ const reducer = (state = initialState, action) => {
         case ActionTypes.GET_ALL_ITEMS:
             return {
                 ...state,
-                items: [...state.items, ...action.payload],
+                items: [...action.payload],
             };
         case ActionTypes.FILTER_ITEMS:
             const filteredItems = state.items.filter((item) => {
@@ -85,6 +84,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: action.payload,
             };
+        case ActionTypes.NEW_ITEM:
+            return {
+                ...state,
+                items: [...state.items, action.payload], 
+            };
+
         default:
             return state;
     }

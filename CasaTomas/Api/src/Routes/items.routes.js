@@ -1,5 +1,5 @@
 import express from "express";
-import { authRequired, verifyAdmin } from "../middleware/validateToken.js";
+import { authRequired } from "../middleware/validateToken.js";
 import { getItems, getItem, createItem, updateItem, deleteItem } from "../Controllers/items.controllers.js";
 
 import { validateSchema } from "../middleware/validateSchema.js";
@@ -20,6 +20,6 @@ router.get("/items/:id", getItem);
 router.put("/items/:id", authRequired, updateItem);
 
 
-router.delete("/items/:id", authRequired, verifyAdmin, deleteItem);
+router.delete("/items/:id", authRequired,  deleteItem);
 
 export default router;
