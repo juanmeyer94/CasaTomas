@@ -9,7 +9,7 @@ export default {
     extend: {
       backgroundImage:{
         "merceriadashboard": "url('./src/assets/merceria.jpg')",
-        "maquinadashboard": "url('./src/assets/MaquinaDash.png')"
+        "maquinadashboard": "url('./src/assets/MaquinaDash.png')",
       }
     },
   },

@@ -1,10 +1,14 @@
-import {Route, Routes, Navigate} from "react-router-dom";
-import {useSelector} from "react-redux"
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux"
 
 import Home from "./Components/Home/Home"
 import Test from "./Components/test/Test";
 import Login from "./Components/Login/Login";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import { AuthProvider } from "./Components/Dashboard/Context/AdminContext"
+import ProtectedRoutes from "./Components/ShieldRoutes/ProtectedRoutes";
+import { ItemsProvider } from "./Components/Dashboard/Context/ItemsContext";
+import AboutUs from "./Components/AboutUs/AboutUs"
 
 
 
@@ -13,26 +17,28 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 function App() {
 
   const isLogged = useSelector((state) => state.isLoggedIn);
- 
+
   return (
-   <div>
-     <Routes>
-     
-      {isLogged ? (
-          <Route path="/dashboard" element={<Dashboard />} />
+    <div>
+      <AuthProvider>
+        <ItemsProvider>
+        <Routes>
+          <Route element={<ProtectedRoutes />}>
+            
+              <Route path="/dashboard" element={<Dashboard />} />
+
+           
+          </Route>
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/" element={<Home />} />
           
-        ) : (
-          <Route path="/dashboard" element={<Navigate to="/login" />
-        } />
-        )}
-      <Route path="/login" element={<Login/>} />
-      <Route path="/" element={<Home />} />
-      <Route path="/test" element={<Test />} />
-     </Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/test" element={<Test />} />
+        </Routes>
+        </ItemsProvider>
+      </AuthProvider>
 
-
-
-   </div>
+    </div>
   )
 }
 

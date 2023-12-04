@@ -30,7 +30,7 @@ const NavBar = () => {
                     <a href="/" className="text-gray-900 dark:text-white hover:underline " aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="#" className="text-gray-900 dark:text-white hover:underline">Empresa</a>
+                    <a href="/aboutus" className="text-gray-900 dark:text-white hover:underline">Empresa</a>
                 </li>
                 
                 <li>

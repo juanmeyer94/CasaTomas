@@ -22,12 +22,7 @@ export const verifyAdmin = (req, res, next) => {
     jwt.verify(token, TOKEN_SECRET, (err, user)=> {
         if(err) return res.status(403).json({message:"Invalid token"})
 
-        if(user.isSuperAdmin){
-            req.user = user;
-
-        } else{
-            return res.status(403).json({message:"Permission denied"})
-        }
+        
     })
 
 }

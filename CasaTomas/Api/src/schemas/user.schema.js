@@ -2,31 +2,31 @@ import { z } from "zod";
 
 export const registerSchema = z.object({
     username: z.string({
-        required_error: "Username is required"
+        required_error: "Username es obligatorio"
     }),
     email: z.string({
-        required_error:"Email is required"
+        required_error:"Email es obligatorio"
     }).email({
-        message:"Invalid email"
+        message:"Email inválido "
     }),
     password: z.string({
-        required_error: "Password is required"
+        required_error: "Password es obligatoria"
     }).min(8, {
-        message: "Password must be at least 8 characters"
+        message: "La contraseña debe tener un mínimo de 8 caracteres"
     })
 })
 
 
 export const loginSchema = z.object({
     email: z.string({
-        required_error: "Email is required"
+        required_error: "Email es obligatorio"
     }).email({
-        message: "Invalid Email"
+        message: "Email inválido "
     }),
     password: z.string({
-        required_error: "Password is required"
+        required_error: "Password es obligatoria"
     }).min(8, {
-        message: "Password must be at least 8 characters"
+        message: "Password o email incorrectos"
     })
 });
 

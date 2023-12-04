@@ -1,22 +1,23 @@
 import Card from "../Card/Card";
 import OfferCarousel from "../Carousel/OfferCarousel";
 
-const OffersCards = ({data}) => {
+
+const OffersCards = ({data, closeFullCard, FullCardData, openFullCard}) => {
 
     const offers = data.filter((item) => item.offer)
     const showOffers = (offer) => (
-        <Card key={offer.id} {...offer.data.items[0]} />
+        <Card   openFullCard={() => openFullCard(offer ? offer.id : offer._id)} key={offer.id} {...offer.data.items[0]} id={offer.id} />
     );
 
 //recordar acomodar filtros para que sean minuscula o mayuscula, con o sin acento, etc
     const maquinas = data.filter((item) => item.section === "Maquina")
     const mostrarMaquinas = (maquinas) => (
-        <Card key={maquinas.id} {...maquinas.data.items[0]} />
+        <Card    openFullCard={() => openFullCard(maquinas.id ? maquinas.id : maquinas._id)} key={maquinas.id} {...maquinas.data.items[0]} id={maquinas.id} />
     )
 
     const merceria = data.filter((item) => item.section === "Merceria");
     const mostrarMerceria = (merceria) => (
-        <Card key={merceria.id} {...merceria.data.items[0]}/>
+        <Card    openFullCard={() => openFullCard(merceria.id ? merceria.id : merceria._id)} key={merceria.id} {...merceria.data.items[0]} id={merceria.id}/>
     )
   
 
