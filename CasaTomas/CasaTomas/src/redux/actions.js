@@ -110,7 +110,7 @@ export const getItemById = async (id) => {
       const response = await axios.get(`/items/${id}`);
       return response
     } catch (error) {
-      console.log("no anda pa", error);
+      res.status(400).json({message:"Id no encontrado"})
     }
   
 };
@@ -121,9 +121,42 @@ export const deleteItemById2 = async (id) => {
     const response = await axios.delete(`/items/${id}`);
     return response
   } catch (error) {
-    console.log("no anda pa", error);
+    res.status(400).json({message:"Id no encontrado"})
   }
 
 };
 
 
+
+export const updatedItem = async (id, data) => {
+  
+  try {
+    const response = await axios.put(`/items/${id}`, data);
+    return response
+  } catch (error) {
+    res.status(400).json({message:"Id no encontrado"})
+  }
+
+};
+
+
+export const addToCart = (data, quantity = 1) => {
+  
+  return (dispatch) => {
+      dispatch({
+          type: ActionTypes.ADD_CART,
+          payload: { ...data, quantity }, 
+      });
+  };
+};
+
+
+export const changeQuantity = (productId, number) => ({
+  type: 'CHANGE_QUANTITY',
+  payload: { productId, number },
+});
+
+export const removeProduct = (productId2) => ({
+  type: 'REMOVE_PRODUCT',
+  payload: { productId2 },
+});

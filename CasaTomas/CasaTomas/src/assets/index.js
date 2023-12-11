@@ -6,6 +6,8 @@ import logoLogin from "./logoLogin.png"
 import MaquinaDash from "./MaquinaDash.png"
 import maqdash from "./maqdash.jpg"
 import style30 from "./style30.jpg"
+import carritologo from "./carritologo.png"
+import whatsapplogo from "./whatsapp.png"
 
 
 
@@ -13,5 +15,4 @@ import style30 from "./style30.jpg"
 
 
 
-
-export {carousel0, carousel1, carousel2, logo, logoLogin, MaquinaDash, maqdash, style30};
+export {carousel0, carousel1, carousel2, logo, logoLogin, MaquinaDash, maqdash, style30, carritologo, whatsapplogo};

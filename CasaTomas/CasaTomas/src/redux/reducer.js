@@ -8,6 +8,7 @@ const initialState = {
     isLoggedIn: false,
     items: [],
     filteredItems: [],
+    cart: [],
 
 }
 
@@ -85,10 +86,52 @@ const reducer = (state = initialState, action) => {
                 isLoggedIn: action.payload,
             };
         case ActionTypes.NEW_ITEM:
+
             return {
                 ...state,
-                items: [...state.items, action.payload], 
+                items: [...state.items, action.payload],
             };
+        case ActionTypes.CHANGE_QUANTITY:
+            const { productId, number } = action.payload;
+            const updatedCart = state.cart.map((item) => ({
+                ...item,
+                quantity: item._id === productId ? Math.max(0, item.quantity + number) : item.quantity,
+            }));
+
+            // Filtra los elementos con cantidad mayor a 0 para eliminar los productos con cantidad 0
+            const filteredCart = updatedCart.filter((item) => item.quantity > 0);
+
+            return {
+                ...state,
+                cart: filteredCart,
+            };
+        case ActionTypes.ADD_CART:
+            const newItem = action.payload;
+            const existingItem = state.cart.find((item) => item._id === newItem._id);
+
+            if (existingItem) {
+                // If the item is already in the cart, update the quantity
+                existingItem.quantity = (existingItem.quantity || 0) + (newItem.quantity || 1);
+                return {
+                    ...state,
+                    cart: [...state.cart],
+                };
+            } else {
+                // If the item is not in the cart, add it with the provided quantity or default to 1
+                newItem.quantity = newItem.quantity || 1;
+                return {
+                    ...state,
+                    cart: [...state.cart, newItem],
+                };
+            }
+        case ActionTypes.REMOVE_PRODUCT:
+  const { productId2 } = action.payload;
+  const updatedCartAfterRemove = state.cart.filter((item) => item._id !== productId2);
+
+  return {
+    ...state,
+    cart: updatedCartAfterRemove,
+  };
 
         default:
             return state;

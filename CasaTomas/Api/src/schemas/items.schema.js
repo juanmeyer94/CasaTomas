@@ -8,6 +8,7 @@ const itemSchema = z.object({
     summary: z.string().optional(),
     description: z.string().optional(),
     specsTecs: z.string().optional(),
+   
   });
   
 

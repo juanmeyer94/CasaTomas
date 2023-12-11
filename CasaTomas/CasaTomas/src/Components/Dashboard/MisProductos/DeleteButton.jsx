@@ -1,14 +1,14 @@
 import "./DeleteButton.styless.css";
 import Swal from 'sweetalert2';
 import { useItems } from "../Context/ItemsContext";
-import { useNavigate } from "react-router-dom";
 import { getAllItemsBdd } from "../../../redux/actions";
 import {useDispatch} from "react-redux"
 
 const DeleteButton = ({ id }) => {
     const {deleteItemById} = useItems()
     const dispatch = useDispatch()
- const history = useNavigate();
+
+
   const handleDeleteClick = async () => {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {

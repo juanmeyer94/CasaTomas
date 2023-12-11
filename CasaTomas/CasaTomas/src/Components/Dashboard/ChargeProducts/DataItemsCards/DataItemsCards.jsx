@@ -54,7 +54,7 @@ const DataItemCards = ({ initialState, setInitialState, onImageUpload }) => {
   
       console.log("enviado");
     } catch (error) {
-      // Si hubo un error en el dispatch, muestra un SweetAlert de error
+     
       Swal.fire({
         icon: 'error',
         title: 'Error',

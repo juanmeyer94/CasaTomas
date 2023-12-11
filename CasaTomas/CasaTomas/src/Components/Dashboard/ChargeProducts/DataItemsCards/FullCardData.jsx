@@ -1,8 +1,7 @@
 
 const FullCardData = ({ closeFullCard, FullCardData }) => {
 
-   
-
+  
 
 
     return (

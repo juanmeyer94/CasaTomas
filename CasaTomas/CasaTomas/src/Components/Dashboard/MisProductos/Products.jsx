@@ -3,6 +3,7 @@ import "./Products.styless.css"
 import AdminCards from './AdminCards';
 import { useSelector } from "react-redux"
 import FullCardData from "../ChargeProducts/DataItemsCards/FullCardData";
+import EditModal from "../MisProductos/EditModal"
 import { getItemById } from '../../../redux/actions';
 
 const Products = () => {
@@ -11,18 +12,35 @@ const Products = () => {
   const [filtered, setFiltered] = useState({ section: '', subsection: '' });
   const [filterActive, setFilterActive] = useState(false)
   const [activeData, setActiveData] = useState(data);
+
   const [fullCardData, setFullCardData] = useState(null);
+  const [isFullCardOpen, setIsFullCardOpen] = useState(false);
+  
+  const [isEditCardOpen, setIsEditCardopen] = useState(false);
+  const [editCardData, setEditCardData] = useState(null)
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
-  const [isFullCardOpen, setIsFullCardOpen] = useState(false);
+
+
 
   const openFullCard = async (id) => {
     try {
       const response = await getItemById(id);
       setFullCardData(response.data);
       setIsFullCardOpen(true);
-      console.log(`Abriendo información para la card con ID: ${id}`);
+    } catch (error) {
+      console.error('Error al obtener la información de la tarjeta completa:', error);
+    }
+  };
+
+  
+  const editCard = async (id) => {
+    try {
+      const response = await getItemById(id);
+      setEditCardData(response.data);
+      setIsEditCardopen(true)
+    
     } catch (error) {
       console.error('Error al obtener la información de la tarjeta completa:', error);
     }
@@ -32,6 +50,9 @@ const Products = () => {
     setIsFullCardOpen(false);
   };
 
+  const closeEditCard = () => {
+    setIsEditCardopen(false);
+  };
 
 
   const handleChange = (value) => {
@@ -150,6 +171,7 @@ const Products = () => {
             specsTecs={item.data.items[0].specsTecs}
             summary={item.data.items[0].summary}
             openFullCard={() => openFullCard(item.id ? item.id : item._id)}
+            editCard={() => editCard(item.id ? item.id : item._id)}
           />
         ))}
 
@@ -168,6 +190,9 @@ const Products = () => {
       </div>
       <div >
         {isFullCardOpen && <FullCardData closeFullCard={closeFullCard} FullCardData={fullCardData} />}
+      </div>
+      <div >
+        {isEditCardOpen && <EditModal closeEditCard={closeEditCard} editCardData={editCardData} />}
       </div>
 
     </div>
