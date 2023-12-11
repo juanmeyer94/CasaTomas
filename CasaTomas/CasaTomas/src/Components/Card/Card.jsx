@@ -3,7 +3,7 @@ import { getItemById } from "../../redux/actions";
 
 const Card = ({photo, price, name, description,summary, specsTecs, id, marca, openFullCard}) => {
   
-    console.log(id)
+    
 
     return (
         

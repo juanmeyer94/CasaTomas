@@ -9,3 +9,6 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const SET_LOGGED_IN = "SET_LOGGED_IN";
 
 export const NEW_ITEM = "NEW_ITEM";
+export const ADD_CART = "ADD_CART"
+export const CHANGE_QUANTITY = "CHANGE_QUANTITY"
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';

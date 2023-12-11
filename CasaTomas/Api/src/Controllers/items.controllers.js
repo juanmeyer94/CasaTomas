@@ -44,7 +44,7 @@ export const updateItem = async (req, res) => {
         if (!updatedItemData) {
             return res.status(404).json({ message: "Item not found" });
         }
-        res.json(updatedItemData);
+        res.status(200).json(updatedItemData);
     } catch (error) {
         console.error("Error al actualizar el item:", error);
         res.status(500).json({ error: "Internal Server Error" });

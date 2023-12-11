@@ -4,7 +4,7 @@ import EditButton from "./EditButton";
 
 import { useState } from "react";
 
-const AdminCards = ({ photo, price, name, marca, description, summary, openFullCard, id }) => {
+const AdminCards = ({ photo, price, name, marca, description, summary, openFullCard, id, editCard }) => {
 
   const { user, isAuthenticated } = useAuth();
  
@@ -17,8 +17,8 @@ const AdminCards = ({ photo, price, name, marca, description, summary, openFullC
         <DeleteButton id={id} />
       </div> : null}
       {isAuthenticated ? <div className="absolute top-14 right-1 z-20">
-        <EditButton id={id} />
-      </div> : console.log("el edit button no se muestra")}
+        <EditButton id={id} editCard={editCard}/>
+      </div> :null}
       <div className="relative">
         <img className=" rounded-xl " src={photo} alt="Colors" />
         <p className="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg ">${price}</p>

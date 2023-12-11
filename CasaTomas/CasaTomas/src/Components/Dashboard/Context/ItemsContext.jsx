@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { deleteItemById2, getItemById } from "../../../redux/actions";
+import { deleteItemById2, getItemById, updatedItem } from "../../../redux/actions";
 
 
 const ItemsContext = createContext();
@@ -33,9 +33,18 @@ export function ItemsProvider({children}) {
         }
       };
 
+      const updateItem = async (id, data) => {
+        try {
+          const rest = await updatedItem(id, data);
+          return rest
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
 
     return (
-        <ItemsContext.Provider value={{getItem, deleteItemById}}>
+        <ItemsContext.Provider value={{getItem, deleteItemById, updateItem}}>
             {children}
         </ItemsContext.Provider>
     )

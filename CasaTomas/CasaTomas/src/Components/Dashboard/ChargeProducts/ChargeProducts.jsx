@@ -103,7 +103,7 @@ const ChargeProducts = () => {
     subsection: "",
     filter: false,
     data: {
-      type: "Aqui falla",
+      type: "",
       items: [
         {
           marca: "",
@@ -117,6 +117,7 @@ const ChargeProducts = () => {
       ],
     },
   });
+
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
 
@@ -255,7 +256,7 @@ const ChargeProducts = () => {
 
   const handleShowCards = () => {
     setShowCard(!showCard)
-    console.log(initialState)
+    
    }
  
    const handleImageUpload = (newUrl) => {
