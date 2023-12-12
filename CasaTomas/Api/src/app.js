@@ -14,7 +14,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: "casa-tomas-frontend.vercel.app",
+    origin: ["https://casa-tomas-frontend.vercel.app/"],
     credentials:true
 }))
 app.use(morgan("dev"));
