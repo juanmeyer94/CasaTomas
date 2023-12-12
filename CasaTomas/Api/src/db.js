@@ -1,8 +1,11 @@
 import mongoose from "mongoose"
+import dotenv from "dotenv"
+
+dotenv.config();
 
 export const connectDB = async () => {
 
-    const URL = `mongodb://127.0.0.1:27017/CasaTomas`
+    const URL = process.env.VITE_MONGO_URI
 
     try{
     await mongoose.connect(URL)

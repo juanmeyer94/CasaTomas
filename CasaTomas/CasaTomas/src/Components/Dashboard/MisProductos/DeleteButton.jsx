@@ -29,7 +29,6 @@ const DeleteButton = ({ id }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          // Llamada a la función para eliminar el ítem
           const response = await deleteItemById(id);
             console.log(response.status)
           if (response.message === 'Item deleted successfully') {

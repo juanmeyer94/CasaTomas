@@ -19,11 +19,12 @@ const orderItemSchema = z.object({
   colour: z.string().optional(),
 });
 
-const orderSchema = z.object({
+export const orderSchema = z.object({
   orderItems: z.array(orderItemSchema),
-  userId: z.string(),
   userEmail: z.string(),
   userName: z.string(),
   userLastName: z.string(),
   totalAmount: z.number(),
+  status: z.string().optional(),
+  deleted: z.boolean().optional(), 
 });

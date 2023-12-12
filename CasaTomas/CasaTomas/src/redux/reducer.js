@@ -9,6 +9,7 @@ const initialState = {
     items: [],
     filteredItems: [],
     cart: [],
+    orders: [],
 
 }
 
@@ -98,7 +99,6 @@ const reducer = (state = initialState, action) => {
                 quantity: item._id === productId ? Math.max(0, item.quantity + number) : item.quantity,
             }));
 
-            // Filtra los elementos con cantidad mayor a 0 para eliminar los productos con cantidad 0
             const filteredCart = updatedCart.filter((item) => item.quantity > 0);
 
             return {
@@ -110,29 +110,56 @@ const reducer = (state = initialState, action) => {
             const existingItem = state.cart.find((item) => item._id === newItem._id);
 
             if (existingItem) {
-                // If the item is already in the cart, update the quantity
+
                 existingItem.quantity = (existingItem.quantity || 0) + (newItem.quantity || 1);
                 return {
                     ...state,
                     cart: [...state.cart],
                 };
             } else {
-                // If the item is not in the cart, add it with the provided quantity or default to 1
                 newItem.quantity = newItem.quantity || 1;
                 return {
                     ...state,
                     cart: [...state.cart, newItem],
-                };
-            }
+                }
+            };
         case ActionTypes.REMOVE_PRODUCT:
-  const { productId2 } = action.payload;
-  const updatedCartAfterRemove = state.cart.filter((item) => item._id !== productId2);
+            const { productId2 } = action.payload;
+            const updatedCartAfterRemove = state.cart.filter((item) => item._id !== productId2);
 
-  return {
-    ...state,
-    cart: updatedCartAfterRemove,
-  };
+            return {
+                ...state,
+                cart: updatedCartAfterRemove,
+            };
+        case ActionTypes.GET_ALL_ORDERS:
+            return {
+                ...state,
+                orders: action.payload,
+            };
+        case ActionTypes.CREATE_ORDER:
+            return {
+                ...state,
+                orders: [...state.orders, action.payload],
+            };
+        case ActionTypes.UPDATE_ORDER_STATUS:
+            const { orderId, newStatus } = action.payload;
+            const updatedOrders = state.orders.map((order) => ({
+                ...order,
+                status: order._id === orderId ? newStatus : order.status,
+            }));
 
+            return {
+                ...state,
+                orders: updatedOrders,
+            };
+        case ActionTypes.DELETE_ORDER:
+            const { orderIdToDelete } = action.payload;
+            const updatedOrdersAfterDelete = state.orders.filter((order) => order._id !== orderIdToDelete);
+
+            return {
+                ...state,
+                orders: updatedOrdersAfterDelete,
+            };
         default:
             return state;
     }

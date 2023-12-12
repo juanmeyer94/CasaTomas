@@ -1,6 +1,6 @@
 import * as ActionTypes from "./actions-types"
 import axios from "./axios"
-import { useNavigate } from 'react-router-dom';
+
 
 export const getAllItems = (data) => {
   return {
@@ -160,3 +160,81 @@ export const removeProduct = (productId2) => ({
   type: 'REMOVE_PRODUCT',
   payload: { productId2 },
 });
+
+
+
+
+export const getAllOrders = (data) => ({
+  type: ActionTypes.GET_ALL_ORDERS,
+  payload: data,
+});
+
+export const createOrder = (data) => ({
+  type: ActionTypes.CREATE_ORDER,
+  payload: data,
+});
+
+export const updateOrderStatus = (orderId, newStatus) => ({
+  type: ActionTypes.UPDATE_ORDER_STATUS,
+  payload: {
+    orderId,
+    newStatus,
+  },
+});
+
+export const deleteOrder = (orderIdToDelete) => ({
+  type: ActionTypes.DELETE_ORDER,
+  payload: {
+    orderIdToDelete,
+  },
+});
+
+export const getAllOrdersFromApi = () => async (dispatch) => {
+  try {
+    const response = await axios.get("/orders");
+    dispatch(getAllOrders(response.data));
+  } catch (error) {
+    console.error("Error al obtener las órdenes:", error);
+  }
+};
+
+export const createOrderToApi = (orderData) => async (dispatch) => {
+  try {
+    const response = await axios.post("/orders", orderData);
+    dispatch(createOrder(response.data));
+  } catch (error) {
+    console.error("Error al crear la orden:", error);
+  }
+};
+
+export const updateOrderStatusToApi = async (orderId, newStatus) => {
+  try {
+    const response = await axios.put(`/orders/${orderId}`, { status: newStatus });
+   
+    return response;
+  } catch (error) {
+    console.error("Error al actualizar el estado de la orden:", error);
+  }
+};
+
+
+
+export const deleteOrderToApi = (orderIdToDelete) => async (dispatch) => {
+  console.log(orderIdToDelete, "se llamo")
+  try {
+    await axios.delete(`/orders/${orderIdToDelete}`);
+    dispatch(deleteOrder(orderIdToDelete));
+  } catch (error) {
+    console.error("Error al eliminar la orden:", error);
+  }
+};
+
+export const getOrderById = async (id) => {
+  try {
+    const response = await axios.get(`/orders/${id}`);
+    return response;
+  } catch (error) {
+    
+    throw new Error("Id no encontrado");
+  }
+};

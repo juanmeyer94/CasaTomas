@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useEffect, useRef } from "react";
-import { registerUser, loginUser, getAllItemsBdd } from "../../../redux/actions";
+import { registerUser, loginUser, getAllItemsBdd, getAllOrdersFromApi, getOrderById, updateOrderStatusToApi, updateOrderStatus, getAllOrders, deleteOrderToApi, deleteOrder } from "../../../redux/actions";
 import {useDispatch } from "react-redux"
 import Cookies from "js-cookie"
 import { verifyTokenRequest } from "../../../redux/actions";
@@ -60,12 +60,56 @@ export const AuthProvider = ({ children }) => {
         }
       };
 
+
       const logout = () => {
         Cookies.remove("token");
         setUser(null);
         setIsAuthenticated(false);
       };
 
+      const ordersBdd = () => {
+        try {
+          dispatch(getAllOrdersFromApi())
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      const orderById = async (id) => {
+        try {
+         const response = await getOrderById(id);
+         return response
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      const updateStatus = async (id, status) => {
+        console.log(id, status);
+        try {
+          const response = await updateOrderStatusToApi(id, status);
+          dispatch(updateOrderStatus(id, status));
+          ordersBdd();
+          return response;
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
+      const deleteOrderGeneral = async (id) => {
+      console.log("se llamo")
+        try {
+            dispatch(deleteOrderToApi(id));
+    
+            await ordersBdd();
+    
+            return "Orden eliminada exitosamente";
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    };
+    
       //sacar errores cada 5 seg
       useEffect(() => {
        if(errors.length > 0) {
@@ -108,7 +152,7 @@ export const AuthProvider = ({ children }) => {
               try {
            
                 await dispatch(getAllItemsBdd());
-               console.log("fueron cargados correctamente")
+              
              
               } catch (error) {
                
@@ -132,7 +176,11 @@ export const AuthProvider = ({ children }) => {
             signin,
             isAuthenticated,
             loading,
-            logout
+            logout,
+            ordersBdd,
+            orderById,
+            updateStatus,
+            deleteOrderGeneral,
         }}>
             {children}
         </AuthContext.Provider>

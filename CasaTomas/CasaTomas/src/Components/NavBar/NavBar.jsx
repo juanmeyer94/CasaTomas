@@ -41,7 +41,7 @@ const NavBar = () => {
 
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="bg-blue-50 border-gray-200 dark:bg-gray-900">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
           <a
             href="https://www.facebook.com/casa.tomas.rafaela"
@@ -63,32 +63,32 @@ const NavBar = () => {
               Login
             </a>
            
-            <ToggleThemeV2 />
+           <div className='xs:pl-[100px]'> <ToggleThemeV2 /></div>
           </div>
         </div>
       </nav>
-      <nav className="bg-gray-50 dark:bg-gray-700">
-        <div className="max-w-screen-xl px-4 py-3 mx-auto">
+      <nav className="bg-sky-200 dark:bg-gray-700">
+        <div className="max-w-screen-xl px-2 py-3 mx-auto">
           <div className="flex items-center">
-            <ul className="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-md">
+            <ul className="flex flex-row font-bold mt-0 space-x-8 rtl:space-x-reverse text-md ">
               <li>
-                <a href="/" className="text-gray-900 dark:text-white hover:underline " aria-current="page">
-                  Home
+                <a href="/" className="text-sky-700 dark:text-white hover:underline xl:text-xl " aria-current="page">
+                  Inicio
                 </a>
               </li>
               <li>
-                <a href="/aboutus" className="text-gray-900 dark:text-white hover:underline">
+                <a href="/aboutus" className="text-sky-700 dark:text-white hover:underline xl:text-xl">
                   Empresa
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-900 dark:text-white hover:underline">
+                <a href="#" className="text-sky-700 dark:text-white hover:underline xl:text-xl">
                   Contacto
                 </a>
               </li>
               
               {!showFloatingButton && (
-                    <div className="ml-auto -mt-3 -mb-3 z-40">
+                    <div className="ml-auto -mt-2 -mb-3 z-40">
                     <button onClick={handleOpenModal} className="cursor-pointer xl:ml-[900px] bg-red-300 text-white p-1 rounded-full shadow-md ">
                       <img
                         src={carritologo}
