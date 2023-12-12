@@ -28,7 +28,7 @@ export const filterFilteredItems = (filters) => {
 export const loginUser = (userData) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/api/login", userData);
+      const response = await axios.post("/login", userData);
 
       dispatch({
         type: ActionTypes.LOGIN_USER_SUCCESS,
@@ -54,7 +54,7 @@ export const logoutUser = () => {
 
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/api/logout");
+      const response = await axios.post("/logout");
       dispatch({
         type: ActionTypes.LOGOUT_USER,
         payload: false
@@ -67,7 +67,7 @@ export const logoutUser = () => {
 
 export const registerUser = async (user) => {
   try {
-    const response = await axios.post("http://localhost:3001/api/register", user);
+    const response = await axios.post("/register", user);
     return response; 
   } catch (error) {
     throw error;
@@ -77,7 +77,7 @@ export const registerUser = async (user) => {
 export const newItem = (data) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post("http://localhost:3001/api/items", data);
+      const response = await axios.post("/items", data);
       return response
     } catch (error) {
     

@@ -14,13 +14,14 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: process.env.VITE_ORIGIN_CORS,
+    origin: "casa-tomas-frontend.vercel.app",
     credentials:true
 }))
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
+app.get(res.json("hola"))
 
 app.use("/api",router);
 app.use("/api",itemsRoutes);
