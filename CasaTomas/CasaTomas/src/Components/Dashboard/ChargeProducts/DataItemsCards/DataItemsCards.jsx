@@ -40,10 +40,8 @@ const DataItemCards = ({ initialState, setInitialState, onImageUpload }) => {
     e.preventDefault();
     
     try {
-      // Supongo que `dispatch` es una función asíncrona que devuelve una promesa
       await dispatch(newItem(initialState));
       
-      // Si el dispatch fue exitoso, muestra un SweetAlert de éxito
       Swal.fire({
         icon: 'success',
         title: 'Éxito',

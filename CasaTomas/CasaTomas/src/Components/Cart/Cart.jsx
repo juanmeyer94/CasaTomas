@@ -1,27 +1,61 @@
+import { useState } from "react"
 import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useDispatch } from "react-redux"
-import { changeQuantity, removeProduct } from "../../redux/actions"
+import { changeQuantity, removeProduct, createOrderToApi } from "../../redux/actions"
 
 const Cart = ({ cart, handleCloseModal }) => {
   const dispatch = useDispatch();
+  const [submitting, setSubmitting] = useState(false);
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Correo electrónico inválido').required('El correo electrónico es requerido'),
+    firstName: Yup.string().required('El nombre es requerido'),
+    lastName: Yup.string().required('El apellido es requerido'),
   });
-
-
 
   const formik = useFormik({
     initialValues: {
       email: '',
+      firstName: '',
+      lastName: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log('Correo electrónico enviado:', values.email);
-
+    onSubmit: async (values) => {
+      setSubmitting(true);
+  
+      const orderData = {
+        orderItems: cart.map((product) => ({
+          type: product.type,
+          items: product.items, // Mantener todos los elementos de items
+          _id: product._id,
+          quantity: product.quantity,
+          
+        })),
+        userEmail: values.email,
+        userName: values.firstName,
+        userLastName: values.lastName,
+        totalAmount: calculateTotal(cart),
+        status: "pendiente",
+        deleted: false,
+      };
+  
+      console.log(orderData);
+      
+      try {
+        await dispatch(createOrderToApi(orderData));
+        // Limpiar el carrito después de la creación exitosa
+        cart.forEach((product) => dispatch(removeProduct(product._id)));
+        console.log("Se creó con éxito");
+      } catch (error) {
+        console.error("Error al crear la orden:", error);
+      }
+  
+      setSubmitting(false);
     },
   });
+  
+
 
   const calculateSubtotal = (cart) => {
     return cart.reduce(
@@ -104,7 +138,7 @@ const Cart = ({ cart, handleCloseModal }) => {
                         </div>
 
                         <div className="absolute top-0 right-0 flex sm:bottom-0 sm:top-auto">
-                         
+
                           <button
                             type="button"
                             className="flex rounded p-2 text-center text-gray-500 transition-all duration-200 ease-in-out focus:shadow hover:text-gray-900"
@@ -165,22 +199,42 @@ const Cart = ({ cart, handleCloseModal }) => {
                   {formik.touched.email && formik.errors.email ? (
                     <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
                   ) : null}
+
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Nombre"
+                    className="mt-2 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 w-full"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.firstName}
+                  />
+                  {formik.touched.firstName && formik.errors.firstName ? (
+                    <div className="text-red-500 text-sm mt-1">{formik.errors.firstName}</div>
+                  ) : null}
+
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Apellido"
+                    className="mt-2 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300 w-full"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.lastName}
+                  />
+                  {formik.touched.lastName && formik.errors.lastName ? (
+                    <div className="text-red-500 text-sm mt-1">{formik.errors.lastName}</div>
+                  ) : null}
+
                   <button
                     type="submit"
-                    className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
-                    disabled={!formik.isValid || formik.isSubmitting} // Deshabilita el botón si el formulario no es válido o está en proceso de envío
+                    className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 mt-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
+                    disabled={!formik.isValid || submitting}
                   >
-                    ENVIAR
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="group-hover:ml-8 ml-4 h-6 w-6 transition-all"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
+                    {submitting ? "ENVIANDO..." : "ENVIAR"}
+                    {/* ... Icono de carga opcional */}
                   </button>
                 </form>
                 <button

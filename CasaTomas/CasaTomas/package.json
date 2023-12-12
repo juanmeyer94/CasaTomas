@@ -14,6 +14,7 @@
     "@cloudinary/url-gen": "^1.13.0",
     "@iconscout/unicons": "^4.0.8",
     "axios": "^1.6.2",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "flowbite": "^2.1.1",
     "flowbite-react": "^0.6.4",
