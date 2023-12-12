@@ -21,7 +21,9 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
 
-app.get(res.json("hola"))
+app.get("/", (req, res) => {
+    res.json("Hello");
+} )
 
 app.use("/api",router);
 app.use("/api",itemsRoutes);
