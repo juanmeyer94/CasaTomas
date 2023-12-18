@@ -21,7 +21,8 @@
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.1",
     "morgan": "^1.10.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "modulename":"0.0.4",
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
