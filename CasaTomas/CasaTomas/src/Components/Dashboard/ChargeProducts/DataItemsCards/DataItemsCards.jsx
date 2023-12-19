@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux"
 import { newItem } from "../../../../redux/actions";
 import Swal from 'sweetalert2';
 
-const DataItemCards = ({ initialState, setInitialState, onImageUpload }) => {
+const DataItemCards = ({ initialState, setInitialState, onImageUpload, setSelectedComponent }) => {
   const dispatch = useDispatch();
 
  
@@ -47,7 +47,7 @@ const DataItemCards = ({ initialState, setInitialState, onImageUpload }) => {
         title: 'Éxito',
         text: 'La operación se realizó correctamente.',
       }).then(function(){
-        window.location.reload()
+        setSelectedComponent("products")
       })
   
       console.log("enviado");
