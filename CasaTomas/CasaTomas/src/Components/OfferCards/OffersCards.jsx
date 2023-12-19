@@ -6,10 +6,9 @@ const OffersCards = ({data, closeFullCard, FullCardData, openFullCard}) => {
 
     const offers = data.filter((item) => item.offer)
     const showOffers = (offer) => (
-        <Card   openFullCard={() => openFullCard(offer ? offer.id : offer._id)} key={offer.id} {...offer.data.items[0]} id={offer.id} />
+        <Card   openFullCard={() => openFullCard(offer.id ? offer.id : offer._id)} key={offer.id} {...offer.data.items[0]} id={offer.id} />
     );
 
-//recordar acomodar filtros para que sean minuscula o mayuscula, con o sin acento, etc
     const maquinas = data.filter((item) => item.section === "Maquina")
     const mostrarMaquinas = (maquinas) => (
         <Card    openFullCard={() => openFullCard(maquinas.id ? maquinas.id : maquinas._id)} key={maquinas.id} {...maquinas.data.items[0]} id={maquinas.id} />
