@@ -54,7 +54,7 @@ const ChargeProducts = () => {
     },
     {
       name: "Reparadores",
-      subtypes: "Parches y reparadores",
+      subtypes: ["Parches y reparadores"],
       title: "Seleccionemos la subcategoría de Reparadores"
     },
     {
