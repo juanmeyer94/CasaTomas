@@ -18,7 +18,7 @@ const DataItemCards = ({ initialState, setInitialState, onImageUpload }) => {
         items: [
           {
             ...prev.data.items[0],
-            [name]: name === "price" ? parseFloat(value) : value,
+            [name]: value,
           },
         ],
       },
