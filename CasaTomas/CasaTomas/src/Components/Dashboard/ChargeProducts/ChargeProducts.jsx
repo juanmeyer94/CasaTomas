@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./cardstyles.css"
 import DropDown from "./dropdown/DropDown";
 import DataItemCards from "./DataItemsCards/DataItemsCards";
-const ChargeProducts = () => {
+const ChargeProducts = ({setSelectedComponent}) => {
 
 
   const categorias = [
@@ -350,7 +350,7 @@ const ChargeProducts = () => {
           )}
         </>
       ) : (
-       <DataItemCards initialState={initialState} setInitialState={setInitialState} onImageUpload={handleImageUpload} />
+       <DataItemCards initialState={initialState} setInitialState={setInitialState} onImageUpload={handleImageUpload} setSelectedComponent={setSelectedComponent} />
       )}
     </div>
   );
