@@ -11,15 +11,15 @@ const router = express.Router();
 router.get("/items", getItems);
 
 
-router.post("/items", authRequired, validateSchema(itemDataSchema),createItem);
+router.post("/items", validateSchema(itemDataSchema),createItem);
 
 
 router.get("/items/:id", getItem);
 
 
-router.put("/items/:id", authRequired, updateItem);
+router.put("/items/:id", updateItem);
 
 
-router.delete("/items/:id", authRequired,  deleteItem);
+router.delete("/items/:id", deleteItem);
 
 export default router;
