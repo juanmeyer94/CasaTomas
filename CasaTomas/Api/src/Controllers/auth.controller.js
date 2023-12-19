@@ -44,21 +44,29 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
+        console.log("Comenzando el proceso de inicio de sesión...");
+
         const userFound = await User.findOne({ email });
 
-        if (!userFound) return res.status(400).json(
-            { message: "Usuario no encontrado" }
-        )
-        const isMatch = await bcrypt.compare(password, userFound.password)
+        if (!userFound) {
+            console.log("Usuario no encontrado");
+            return res.status(400).json({ message: "Usuario no encontrado" });
+        }
 
-        if (!isMatch) return res.status(400).json({ message: "Password o email incorrectos" })
+        const isMatch = await bcrypt.compare(password, userFound.password);
 
+        if (!isMatch) {
+            console.log("Contraseña o email incorrectos");
+            return res.status(400).json({ message: "Password o email incorrectos" });
+        }
 
+        const token = await createAccesToken({ id: userFound._id });
 
+        console.log("Token generado con éxito:", token);
 
-        const token = await createAccesToken({ id: userFound._id })
+        res.cookie("token", token);
 
-        res.cookie("token", token)
+        console.log("Cookie de token establecida con éxito");
 
         res.json({
             id: userFound._id,
@@ -69,10 +77,11 @@ export const login = async (req, res) => {
             updatedAt: userFound.updatedAt,
         });
     } catch (error) {
-
+        console.error("Error al procesar la solicitud:", error);
         res.status(500).json({ error: "Error al registrar usuario" });
     }
 };
+
 
 export const logout = (req, res) => {
     res.cookie("token", "",
