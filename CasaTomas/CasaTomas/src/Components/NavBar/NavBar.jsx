@@ -42,7 +42,7 @@ const NavBar = () => {
   return (
     <div>
       <nav className="bg-blue-50 border-gray-200 dark:bg-gray-900">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-2">
+        <div className="flex flex-wrap justify-between items-center mx-auto  p-2">
           <a
             href="https://www.facebook.com/casa.tomas.rafaela"
             className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -93,7 +93,7 @@ const NavBar = () => {
                       <img
                         src={carritologo}
                         alt="Carrito de compras"
-                        className="h-8 w-8 2xl:h-10 2xl:w-10"
+                        className="h-7 w-7 2xl:h-10 2xl:w-10"
                       />
                     </button>
                   </div>
