@@ -98,27 +98,47 @@ const Products = () => {
       {/* */}
       <div className='flex flex-col items-center justify-center my-8 mx-4 sm:flex-row '>
 
+   <div class="relative">
+  <input
+    class="appearance-none border-2 pl-10 border-gray-300 hover:border-gray-400 transition-colors rounded-md w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:ring-purple-600 focus:border-purple-600 focus:shadow-outline"
+    id="username"
+    type="text"
+    placeholder="Search..."
+  />
+  <div class="absolute right-0 inset-y-0 flex items-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="-ml-1 mr-3 h-5 w-5 text-gray-400 hover:text-gray-500"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </div>
 
-        <div className="flex flex-col items-center space-y-4 sm:flex-row sm:items-center sm:space-x-6 sm:space-y-0 p-2 bg-white rounded-xl shadow-lg">
-          <div className="flex bg-gray-100 p-4 w-full sm:w-72 space-x-4 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input className="bg-gray-100 outline-none" type="text" placeholder="Article name or keyword..." />
-          </div>
-
-
-          <div className="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
-            <span>All categorie</span>
-
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-          <div className="bg-indigo-600 py-3 px-5 text-white font-semibold rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-            <span>Search</span>
-          </div>
-        </div>
+  <div class="absolute left-0 inset-y-0 flex items-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 ml-3 text-gray-400 hover:text-gray-500"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+      />
+    </svg>
+  </div>
+</div>
 
 
 

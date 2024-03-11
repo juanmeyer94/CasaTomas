@@ -78,6 +78,10 @@ export const newItem = (data) => {
   return async (dispatch) => {
     try {
       const response = await axios.post("/items", data);
+      dispatch({
+        type: ActionTypes.NEW_ITEM,
+        payload: data,
+      })
       return response
     } catch (error) {
     

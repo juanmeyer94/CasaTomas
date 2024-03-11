@@ -21,7 +21,7 @@ const FullCardDataPublic = ({ closeFullCard, FullCardData }) => {
     };
 
     const handleBuyNow = () => {
-        dispatch(addToCart(FullCardData.data, quantity)); // Pasa la cantidad al llamar a addToCart
+        dispatch(addToCart(FullCardData.data, quantity)); 
         console.log("Se agregó el item con cantidad", quantity);
         const Toast = Swal.mixin({
             toast: true,
@@ -51,7 +51,7 @@ const FullCardDataPublic = ({ closeFullCard, FullCardData }) => {
 
 
 
-        <div id="default-modal" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center  md:inset-0 h-[calc(100%-1rem)] max-h-full xl:ml-96 xl:mt-40">
+        <div id="default-modal" tabindex="-1" aria-hidden="true" class=" overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center  md:inset-0 h-[calc(100%-1rem)] max-h-full xl:ml-64 xl:mt-30">
             <div class="relative p-4 w-full max-w-7xl max-h-full">
 
                 <div class="relative bg-white min-w-full rounded-lg shadow  dark:bg-gray-700">
