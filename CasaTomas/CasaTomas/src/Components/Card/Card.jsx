@@ -1,4 +1,3 @@
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -28,10 +27,10 @@ const Card = ({ photo, price, name, summary, id, marca, openFullCard }) => {
 
   const formattedPrice = formatPrice(price);
 
+
   return (
     <div className="max-w-[280px] 2xl:min-h-[450px] xl:max-h-[300px] xl:min-h-[300px] 2xl:max-h-[450px] xs:max-h-[280px] xs:min-h-[280px] bg-sky-200 px-4 pt-2 pb-1 rounded-xl shadow-lg transform hover:scale-105 transition duration-500 my-4 border-dashed relative">
       <h1 className="mt-4 text-gray-800 2xl:text-2xl font-bold cursor-pointer text-md">{marca}</h1>
-
       <div className="relative ml-3" >
         {photosArray.length > 1 ? (
           <Slider {...sliderSettings}>
@@ -66,6 +65,7 @@ const Card = ({ photo, price, name, summary, id, marca, openFullCard }) => {
             }
           `}
         </style>
+
       </div>
 
       <h3 className="mb-1 2xl:text-xl text-sm font-bold text-indigo-600 left-0">{name}</h3>

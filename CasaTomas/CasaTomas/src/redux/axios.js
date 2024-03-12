@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: "casatomas-api.vercel.app/api",
+    baseURL: "https://casa-tomas-api.onrender.com/api",
     withCredentials: true,
 })
 

@@ -22,18 +22,18 @@ const NavBar = () => {
   
     useEffect(() => {
       const handleScroll = () => {
-        // Detecta si el usuario ha hecho scroll más allá de cierta posición y muestra el botón flotante
+        
         const scrollY = window.scrollY;
-        const showButtonThreshold = 50; // Ajusta según tus necesidades
+        const showButtonThreshold = 50; 
   
         setShowFloatingButton(scrollY > showButtonThreshold);
       };
       
   
-      // Agrega el listener al evento de scroll
+ 
       window.addEventListener('scroll', handleScroll);
   
-      // Limpia el listener cuando el componente se desmonta
+   
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
@@ -42,12 +42,12 @@ const NavBar = () => {
   return (
     <div>
       <nav className="bg-blue-50 border-gray-200 dark:bg-gray-900">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <div className="flex flex-wrap justify-between items-center mx-auto  p-2">
           <a
             href="https://www.facebook.com/casa.tomas.rafaela"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
-            <img src={Logo} className="h-8 lg:h-12 lg:w-16" alt="Flowbite Logo" />
+            <img src={Logo} className="h-8 lg:h-12 lg:w-20" alt="Casa Tomas Logo" />
             <span className="font-serif self-center text-2xl font-bold whitespace-nowrap text-blue-900 dark:text-white">
               CASA TOMAS
             </span>
@@ -68,38 +68,38 @@ const NavBar = () => {
         </div>
       </nav>
       <nav className="bg-sky-200 dark:bg-gray-700">
-        <div className="max-w-screen-xl px-2 py-3 mx-auto">
+        <div className="max-w-screen-xl px-2 py-2 mx-auto">
           <div className="flex items-center">
             <ul className="flex flex-row font-bold mt-0 space-x-8 rtl:space-x-reverse text-md ">
               <li>
-                <a href="/" className="text-sky-700 dark:text-white hover:underline xl:text-xl " aria-current="page">
+                <a href="/" className="text-sky-700 dark:text-white hover:underline text-sm 2xl:text-xl " aria-current="page">
                   Inicio
                 </a>
               </li>
               <li>
-                <a href="/aboutus" className="text-sky-700 dark:text-white hover:underline xl:text-xl">
+                <a href="/aboutus" className="text-sky-700 dark:text-white hover:underline text-sm 2xl:text-xl">
                   Empresa
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sky-700 dark:text-white hover:underline xl:text-xl">
+                <a href="#" className="text-sky-700 dark:text-white hover:underline text-sm 2xl:text-xl">
                   Contacto
                 </a>
               </li>
               
               {!showFloatingButton && (
-                    <div className="ml-auto -mt-2 -mb-3 z-40">
+                    <div className="ml-auto -mt-1 -mb-3 z-40">
                     <button onClick={handleOpenModal} className="cursor-pointer xl:ml-[900px] bg-red-300 text-white p-1 rounded-full shadow-md ">
                       <img
                         src={carritologo}
                         alt="Carrito de compras"
-                        className="h-10 w-10"
+                        className="h-7 w-7 2xl:h-10 2xl:w-10"
                       />
                     </button>
                   </div>
               )}
             </ul>
-             {/* Botón flotante */}
+             
       {showFloatingButton && (
         <button
           onClick={handleOpenModal}
@@ -108,11 +108,11 @@ const NavBar = () => {
           <img
             src={carritologo}
             alt="Carrito de compras"
-            className="h-8 w-8"
+            className="h-6 w-6 2xl:h-8 2xl:w-8"
           />
         </button>
       )}
-{/* Botón flotante de WhatsApp */}
+
 {showFloatingButton && (
   <a
     href="https://wa.me/+5493492279892"
@@ -123,7 +123,7 @@ const NavBar = () => {
     <img
       src={whatsapplogo}
       alt="WhatsApp"
-      className="h-12 w-12"
+      className="h-10 w-10 2xl:h-12 2xl:w-12"
     />
   </a>
 )}
@@ -131,7 +131,6 @@ const NavBar = () => {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-4">
-            <p>Contenido del modal</p>
             <button onClick={handleCloseModal}>Cerrar</button>
           </div>
         </div>

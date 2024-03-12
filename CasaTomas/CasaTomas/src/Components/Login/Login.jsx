@@ -49,11 +49,11 @@ const Login = () => {
 
 
     return (
-        <div className="grid grid-cols-2 grid-rows-1 gap-2">
+        <div className="grid grid-cols-2 grid-rows-1 gap-0">
             <section className="bg-sky-200 dark:bg-gray-900">
                 <div className="flex flex-col items-center justify-center  py-8  md:h-screen lg:py-0">
                     <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                        <img className=" w-screen h-[340px] -mt-28" src={logoLogin} alt="logo" />
+                        <img className=" w-screen h-[280px] -mt-28" src={logoLogin} alt="logo" />
 
                     </a>
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
