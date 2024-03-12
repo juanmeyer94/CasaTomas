@@ -20,31 +20,37 @@ const EditModal = ({ editCardData, closeEditCard }) => {
       type: editCardData.data.type,
       items: [
         {
-          marca: "",
-          name: "",
-          photo: [],
-          price: "",
-          summary: "",
-          description: "",
-          specsTecs: "asda",
+          marca: editCardData.data.items[0].marca,
+          name: editCardData.data.items[0].name,
+          photo: editCardData.data.items[0].photo,
+          price: editCardData.data.items[0].price,
+          summary: editCardData.data.items[0].summary,
+          description: editCardData.data.items[0].description,
+          specsTecs: editCardData.data.items[0].specsTecs,
         },
       ],
     },
   });
 
+
+  const [newPhotos, updateNewPhotos] = useState([]);
+
   const handleImageUpload = (newUrl) => {
     setEditData((prevInitialState) => {
       const updatedItems = prevInitialState.data.items.map((item, index) => {
         if (index === 0) {
-
+          const updatedPhotos = Array.isArray(newUrl) ? [...newPhotos, ...newUrl] : [...newPhotos, newUrl];
+          updateNewPhotos(updatedPhotos);
           return {
             ...item,
-            photo: [...item.photo, newUrl],
+            photo: updatedPhotos,
           };
         }
         return item;
       });
-
+  
+     
+  
       return {
         ...prevInitialState,
         data: {
@@ -54,6 +60,8 @@ const EditModal = ({ editCardData, closeEditCard }) => {
       };
     });
   };
+  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
