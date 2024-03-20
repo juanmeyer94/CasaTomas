@@ -192,7 +192,7 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             <div className="py-5 border-b border-gray-200 text-center dark:border-gray-700">
               <ul className="pl-4 text-sm md:text-base">
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Agujas para Maquinas")}>Agujas para Máquinas</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Agujas para Máquinas")}>Agujas para Máquinas</button>
                 </li>
                 <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Agujas de mano")}>Agujas de mano</button>
