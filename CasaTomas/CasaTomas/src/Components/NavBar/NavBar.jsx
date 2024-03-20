@@ -44,7 +44,7 @@ const NavBar = () => {
       <nav className="bg-blue-50 border-gray-200 dark:bg-gray-900">
         <div className="flex flex-wrap justify-between items-center mx-auto  p-2">
           <a
-            href="https://www.facebook.com/casa.tomas.rafaela"
+            href="/"
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img src={Logo} className="h-8 lg:h-12 lg:w-20" alt="Casa Tomas Logo" />
@@ -82,7 +82,7 @@ const NavBar = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-sky-700 dark:text-white hover:underline text-sm 2xl:text-xl">
+                <a href="/contact" className="text-sky-700 dark:text-white hover:underline text-sm 2xl:text-xl">
                   Contacto
                 </a>
               </li>
