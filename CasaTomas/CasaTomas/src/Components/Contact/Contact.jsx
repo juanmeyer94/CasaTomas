@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { mapaimg } from '../../assets';
 import NavBar from "../NavBar/NavBar.jsx"
 
 const Contact = () => {
