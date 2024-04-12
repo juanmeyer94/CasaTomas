@@ -4,7 +4,6 @@ import DropDown from "./dropdown/DropDown";
 import DataItemCards from "./DataItemsCards/DataItemsCards";
 const ChargeProducts = ({setSelectedComponent}) => {
 
-
   const categorias = [
     {
       name: "Maquina",
@@ -79,7 +78,7 @@ const ChargeProducts = ({setSelectedComponent}) => {
     },
     {
       name: "Cierres",
-      subtypes: ["Cierres Común Fijo", "Cierre Reforzado Fijo", "Cierre Reforzado Desmontable", "Cierre D. de Perro", "Cierre Perrito", " Cierre de Aluminio y Empavonado", "Cierre Invisible", "Cierre Fijo Bronce", "Cierre por metro y Deslizadores"],
+      subtypes: ["Cierre Común Fijo", "Cierre Reforzado Fijo", "Cierre Reforzado Desmontable", "Cierre D. de Perro", "Cierre Perrito", " Cierre de Aluminio y Empavonado", "Cierre Invisible", "Cierre Fijo Bronce", "Cierre por metro y Deslizadores"],
       title: "Seleccionemos la subcategoría de Cierres"
     },
     {
