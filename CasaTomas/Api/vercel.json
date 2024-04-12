@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "casatomas-api.vercel.app/api/$1" }
+  ]
+}

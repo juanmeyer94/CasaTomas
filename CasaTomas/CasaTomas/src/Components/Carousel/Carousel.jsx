@@ -15,7 +15,7 @@ const Carousel = () => {
   }, []);
 
   return (
-    <div className="relative w-full  overflow-hidden">
+    <div className="relative w-full  overflow-hidden xl:h-[300px] 2xl:h-[400px]">
       <div className="flex transition-transform duration-700 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
         {images.map((image, index) => (
           <div key={index} className="w-full flex-shrink-0 overflow-hidden">

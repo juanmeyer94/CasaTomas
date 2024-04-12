@@ -35,7 +35,7 @@ const Dashboard = () => {
          case 'products':
             return <Products />;
          case 'chargeProducts':
-            return <ChargeProducts />;
+            return <ChargeProducts setSelectedComponent={setSelectedComponent} />;
          case 'Inbox':
             return <Orders orders={orders} />;
          case 'Users':

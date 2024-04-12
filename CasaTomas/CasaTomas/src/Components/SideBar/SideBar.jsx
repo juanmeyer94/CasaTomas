@@ -74,7 +74,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             </div>
           </div>
           <h2 id="accordion-flush-heading-2">
+
             <button type="button" className="flex text-left items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2" onClick={() => handleFilters("Maquina", "Familiar")}>
+
               <span>Maquinas Familiares</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
@@ -99,7 +101,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             </div>
           </div>
           <h2 id="accordion-flush-heading-3">
+
             <button type="button" className="flex text-left items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+
               <span>Repuestos y reparaciones</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
@@ -124,7 +128,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </h2>
 
           <h2 id="accordion-flush-heading-4">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-4" aria-expanded="false" aria-controls="accordion-flush-body-4" onClick={() => handleFilters("Merceria", "Hilos")}>
+
               <span>Hilos</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
@@ -148,7 +154,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </div>
 
           <h2 id="accordion-flush-heading-5">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-5" aria-expanded="false" aria-controls="accordion-flush-body-5"
+
               onClick={() => handleFilters("Merceria", "Puntillas")}>
               <span>Puntillas</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -176,7 +184,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </div>
 
           <h2 id="accordion-flush-heading-6">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-6" aria-expanded="false" aria-controls="accordion-flush-body-6"
+
               onClick={() => handleFilters("Merceria", "Agujas")}>
               <span>Agujas</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -208,7 +218,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
 
 
           <h2 id="accordion-flush-heading-7">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-7" aria-expanded="false" aria-controls="accordion-flush-body-7"
+
               onClick={() => handleFilters("Merceria", "Apliques")}>
               <span>Apliques</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -229,7 +241,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
 
 
           <h2 id="accordion-flush-heading-8">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-8" aria-expanded="false" aria-controls="accordion-flush-body-8"
+
               onClick={() => handleFilters("Merceria", "Reparadores")}>
               <span>Reparadores</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -249,8 +263,10 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </div>
 
           <h2 id="accordion-flush-heading-9">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-9" aria-expanded="false" aria-controls="accordion-flush-body-9"
               onClick={() => handleFilters("Merceria", "Elásticos")}>
+
               <span>Elásticos</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
@@ -279,14 +295,16 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Quebrados")}>Elásticos Quebrados</button>
                 </li>
                 <li className="mb-1">
+
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Elásticos Lenceria")}>Elásticos Lencería</button>
+
                 </li>
               </ul>
             </div>
           </div>
 
           <h2 id="accordion-flush-heading-10">
-            <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-10" aria-expanded="false" aria-controls="accordion-flush-body-10"
+            <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md  2xl:text-xl text-md rtl:text-right text-xl text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-10" aria-expanded="false" aria-controls="accordion-flush-body-10"
               onClick={() => handleFilters("Merceria", "Tijeras")}>
               <span>Tijeras</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -309,7 +327,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
 
 
           <h2 id="accordion-flush-heading-11">
+
             <button type="button" className="flex text-left items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-11" aria-expanded="false" aria-controls="accordion-flush-body-11"
+
               onClick={() => handleFilters("Merceria", "Lubricantes y pegamentos")}>
               <span>Lubricantes y pegamentos</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -331,7 +351,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </div>
 
           <h2 id="accordion-flush-heading-12">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-12" aria-expanded="false" aria-controls="accordion-flush-body-12"
+
               onClick={() => handleFilters("Merceria", "Cintas")}>
               <span>Cintas</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -365,7 +387,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </div>
 
           <h2 id="accordion-flush-heading-13">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-13" aria-expanded="false" aria-controls="accordion-flush-body-13"
+
               onClick={() => handleFilters("Merceria", "Cierres")}>
               <span>Cierres</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -408,7 +432,9 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
           </div>
 
           <h2 id="accordion-flush-heading-14">
+
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-14" aria-expanded="false" aria-controls="accordion-flush-body-14"
+
               onClick={() => handleFilters("Merceria", "Cordones")}>
               <span>Cordones</span>
               <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -433,6 +459,7 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                 </li>
                 <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Cordón de raso")}>Cordón de Raso</button>
+
                 </li>
 
               </ul>
