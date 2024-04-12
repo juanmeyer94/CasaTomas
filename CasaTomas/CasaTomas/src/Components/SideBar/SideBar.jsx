@@ -13,7 +13,6 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
     falseOffers();
     setExecuted(true);
     setLastState({ id, alt });
-    console.log("dio click", id, alt, work);
   }, [handleFilter, falseOffers, work]);
 
   const handleClick = useCallback(() => {
@@ -24,8 +23,6 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
   const clickDoubleFilter = (types) => {
     if (!executed) {
       dispatch(filterFilteredItems({ types }));
-      console.log("dio click en", types);
-      console.log(work);
     } else if (executed) {
       const { id, alt } = lastState;
       handleFilters(id, alt);
@@ -144,9 +141,8 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Hilos de costura")}>Hilos de costura</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={handleClick}>Hilos para manualidades</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Hilos para manualidades")}>Hilos para manualidades</button>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -265,25 +261,25 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             <div className="py-5 border-b border-gray-200 text-center dark:border-gray-700">
               <ul className="pl-4 text-sm md:text-base">
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elasticos de Algodon")}>Elásticos de Algodon</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos de Algodon")}>Elásticos de Algodon</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elasticos de Poliester")}>Elásticos de Poliester</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos de Poliester")}>Elásticos de Poliester</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elasticos Redondos")}>Elásticos Redondos</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Redondos")}>Elásticos Redondos</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elasticos Afelpados")}>Elásticos Afelpados</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Afelpados")}>Elásticos Afelpados</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elasticos Bretel")}>Elásticos Bretel</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Bretel")}>Elásticos Bretel</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elasticos Quebrados")}>Elásticos Quebrados</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Quebrados")}>Elásticos Quebrados</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Elasticos Lenceria")}>Elásticos Lencería</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Elásticos Lenceria")}>Elásticos Lencería</button>
                 </li>
               </ul>
             </div>
@@ -381,7 +377,10 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             <div className="py-5 border-b border-gray-200 text-center dark:border-gray-700">
               <ul className="pl-4 text-sm md:text-base">
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Comun Fijo")}>Cierre Común Fijo</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Común Fijo")}>Cierre Común Fijo</button>
+                </li>
+                <li className="mb-1">
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Reforzado Fijo")}>Cierre Reforzado Fijo</button>
                 </li>
                 <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Reforzado Desmontable")}>Cierre Reforzado Desmontable</button>
@@ -390,19 +389,19 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre D. de Perro")}>Cierre D. de Perro</button>
                 </li>
                 <li className="mb-1">
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Perrito")}>Cierre Perrito</button>
+                </li>
+                <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre de Aluminio y Empavonado")}>Cierre de Aluminio y Empavonado</button>
+                </li>
+                <li className="mb-1">
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Fijo Bronce")}>Cierre Fijo Bronce</button>
                 </li>
                 <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Invisible")}>Cierre Inivisible</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Reforzado Fijo")}>Cierre Reforzado Fijo</button>
-                </li>
-                <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Perrito")}>Cierre Perrito</button>
-                </li>
-                <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre por Metro  y Desilzadores")}>Cierre por Metro y Deslizadores</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre por Metro  y Deslizadores")}>Cierre por Metro y Deslizadores</button>
                 </li>
               </ul>
             </div>
@@ -421,19 +420,19 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             <div className="py-5 border-b border-gray-200 text-center dark:border-gray-700">
               <ul className="pl-4 text-sm md:text-base">
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordon de Zapato")}>Cordón de Zapato</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon de Zapato")}>Cordón de Zapato</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordon de Zapatilla")}>Cordón de Zapatilla</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon de Zapatilla")}>Cordón de Zapatilla</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordon de Borcego")}>Cordón de Borcego</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon de Borcego")}>Cordón de Borcego</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordon Polipropireno")}>Cordón Polipropireno</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon Polipropireno")}>Cordón Polipropireno</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Cordon de raso")}>Cordón de Raso</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Córdon de raso")}>Cordón de Raso</button>
                 </li>
 
               </ul>

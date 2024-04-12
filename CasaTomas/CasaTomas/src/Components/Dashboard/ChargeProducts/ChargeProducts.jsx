@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./cardstyles.css"
 import DropDown from "./dropdown/DropDown";
 import DataItemCards from "./DataItemsCards/DataItemsCards";
-const ChargeProducts = () => {
+const ChargeProducts = ({setSelectedComponent}) => {
 
 
   const categorias = [
@@ -54,7 +54,7 @@ const ChargeProducts = () => {
     },
     {
       name: "Reparadores",
-      subtypes: "Parches y reparadores",
+      subtypes: ["Parches y reparadores"],
       title: "Seleccionemos la subcategoría de Reparadores"
     },
     {
@@ -79,7 +79,7 @@ const ChargeProducts = () => {
     },
     {
       name: "Cierres",
-      subtypes: ["Cierres Común Fijo", "Cierre Reforzado Desmontable", "Cierre D. de Perro", " Cierre de Aluminio y Empavonado", "Cierre Invisible", "Cierre Reforzado Fijo", "Cierre Perrito", "Cierre por metro y Deslizadores"],
+      subtypes: ["Cierres Común Fijo", "Cierre Reforzado Fijo", "Cierre Reforzado Desmontable", "Cierre D. de Perro", "Cierre Perrito", " Cierre de Aluminio y Empavonado", "Cierre Invisible", "Cierre Fijo Bronce", "Cierre por metro y Deslizadores"],
       title: "Seleccionemos la subcategoría de Cierres"
 
     },
@@ -112,7 +112,7 @@ const ChargeProducts = () => {
           price: "",
           summary: "",
           description: "",
-          specsTecs: "asda",
+          specsTecs: "",
         },
       ],
     },
@@ -350,7 +350,7 @@ const ChargeProducts = () => {
           )}
         </>
       ) : (
-       <DataItemCards initialState={initialState} setInitialState={setInitialState} onImageUpload={handleImageUpload} />
+       <DataItemCards initialState={initialState} setInitialState={setInitialState} onImageUpload={handleImageUpload} setSelectedComponent={setSelectedComponent} />
       )}
     </div>
   );
