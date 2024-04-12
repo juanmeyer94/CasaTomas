@@ -4,7 +4,6 @@ import DropDown from "./dropdown/DropDown";
 import DataItemCards from "./DataItemsCards/DataItemsCards";
 const ChargeProducts = ({setSelectedComponent}) => {
 
-
   const categorias = [
     {
       name: "Maquina",
