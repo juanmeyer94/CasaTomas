@@ -24,11 +24,13 @@ const FilteredCards = ({ filteredData, closeFullCard, FullCardData, openFullCard
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 grid-rows-3 gap-4 px-4 py-4">
         {currentCards.map((item, index) => (
           <Card
-            key={item.id}
+            key={item._id}
+            marca={item.data.items[0].marca}
             photo={item.data.items[0].photo}
             price={item.data.items[0].price}
             name={item.data.items[0].name}
             description={item.data.items[0].description}
+            summary={item.data.items[0].summary}
             specsTecs={item.data.items[0].specsTecs}
             className={`col-start-${(index % 5) + 1} row-start-${Math.floor(
               index / 5

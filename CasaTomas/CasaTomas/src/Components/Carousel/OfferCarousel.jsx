@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const OfferCarousel = ({ items, renderItem, itemsPerPageLarge = 5, itemsPerPageSmall = 1 }) => {
+const OfferCarousel = ({ items, renderItem, itemsPerPageLarge = 5, itemsPerPageMedium = 3, itemsPerPageSmall = 1 }) => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 640);
+  const [screenSize, setScreenSize] = useState(getScreenSize());
   const totalItems = items.length;
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 640);
+      setScreenSize(getScreenSize());
     };
 
     window.addEventListener('resize', handleResize);
@@ -17,7 +17,21 @@ const OfferCarousel = ({ items, renderItem, itemsPerPageLarge = 5, itemsPerPageS
     };
   }, []);
 
-  const itemsPerPage = isSmallScreen ? itemsPerPageSmall : itemsPerPageLarge;
+  function getScreenSize() {
+    return window.innerWidth <= 640
+      ? 'small'
+      : window.innerWidth <= 1024
+      ? 'medium'
+      : 'large';
+  }
+
+  const itemsPerPage =
+    screenSize === 'small'
+      ? itemsPerPageSmall
+      : screenSize === 'medium'
+      ? itemsPerPageMedium
+      : itemsPerPageLarge;
+
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePrev = () => {
@@ -34,10 +48,10 @@ const OfferCarousel = ({ items, renderItem, itemsPerPageLarge = 5, itemsPerPageS
 
   return (
     <div>
-      <div className="relative overflow-hidden  ">
-        <div className={`flex justify-center transition-transform duration-300 ease-in-out ${isSmallScreen ? 'w-full' : 'w-full'}`}>
+      <div className="relative overflow-hidden">
+        <div className={`flex justify-center transition-transform duration-300 ease-in-out ${screenSize === 'small' ? 'w-full' : 'w-full'}`}>
           {visibleItems.map((item, index) => (
-            <div key={index} className={`flex-shrink-0 space-y-3 w-full ${isSmallScreen ? 'md:w-full' : 'md:w-1/5 lg:w-1/6'} ${index < itemsPerPage - 1 && !isSmallScreen ? 'mr-4' : ''}`}>
+            <div key={index} className={`flex-shrink-0 space-y-3 w-full ${screenSize === 'small' ? 'md:w-full' : 'md:w-1/3 lg:w-1/6'} ${index < itemsPerPage - 1 && screenSize !== 'small' ? 'mr-4' : ''}`}>
               {renderItem(item)}
             </div>
           ))}

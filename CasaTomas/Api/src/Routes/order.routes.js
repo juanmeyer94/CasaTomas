@@ -7,15 +7,15 @@ import { orderSchema } from "../schemas/order.schema.js";
 
 const orderRouter = express.Router();
 
-orderRouter.get("/orders", authRequired, getOrders);
+orderRouter.get("/orders", getOrders);
 
 orderRouter.post("/orders", validateSchema(orderSchema), createOrder)
 
 orderRouter.get("/orders/:id", getOrder);
 
-orderRouter.put("/orders/:id", authRequired ,updateOrderStatus);
+orderRouter.put("/orders/:id" ,updateOrderStatus);
 
-orderRouter.delete("/orders/:id", authRequired , deleteOrder)
+orderRouter.delete("/orders/:id", deleteOrder)
 
 
 export default orderRouter;

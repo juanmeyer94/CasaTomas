@@ -74,6 +74,7 @@ export const login = async (req, res) => {
     }
 };
 
+
 export const logout = (req, res) => {
     res.cookie("token", "",
         {
