@@ -273,7 +273,7 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Afelpados")}>Elásticos Afelpados</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Bretel")}>Elásticos Bretel</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos de Bretel")}>Elásticos Bretel</button>
                 </li>
                 <li className="mb-1">
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Elásticos Quebrados")}>Elásticos Quebrados</button>
@@ -401,12 +401,12 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
                   <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre Invisible")}>Cierre Inivisible</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre por Metro  y Deslizadores")}>Cierre por Metro y Deslizadores</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cierre por metro y Deslizadores")}>Cierre por Metro y Deslizadores</button>
                 </li>
               </ul>
             </div>
           </div>
-          
+
           <h2 id="accordion-flush-heading-14">
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-14" aria-expanded="false" aria-controls="accordion-flush-body-14"
               onClick={() => handleFilters("Merceria", "Cordones")}>
@@ -420,19 +420,19 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
             <div className="py-5 border-b border-gray-200 text-center dark:border-gray-700">
               <ul className="pl-4 text-sm md:text-base">
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon de Zapato")}>Cordón de Zapato</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordón de Zapato")}>Cordón de Zapato</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon de Zapatilla")}>Cordón de Zapatilla</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordón de Zapatilla")}>Cordón de Zapatilla</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon de Borcego")}>Cordón de Borcego</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordón de Borcego")}>Cordón de Borcego</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Córdon Polipropireno")}>Cordón Polipropireno</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm' onClick={() => clickDoubleFilter("Cordón Polipropireno")}>Cordón Polipropireno</button>
                 </li>
                 <li className="mb-1">
-                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Córdon de raso")}>Cordón de Raso</button>
+                  <button className='hover:underline hover:text-sky-400 hover:decoration-wavy 2xl:text-xl text-sm'  onClick={() => clickDoubleFilter("Cordón de raso")}>Cordón de Raso</button>
                 </li>
 
               </ul>
