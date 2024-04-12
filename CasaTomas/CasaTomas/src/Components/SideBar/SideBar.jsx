@@ -406,7 +406,6 @@ const SideBar = ({ showOffers, trueOffers, falseOffers, handleFilter }) => {
               </ul>
             </div>
           </div>
-
           <h2 id="accordion-flush-heading-14">
             <button type="button" className="flex items-center justify-between w-full py-2 px-3 rounded-md font-medium rtl:text-right 2xl:text-xl text-md text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-14" aria-expanded="false" aria-controls="accordion-flush-body-14"
               onClick={() => handleFilters("Merceria", "Cordones")}>
