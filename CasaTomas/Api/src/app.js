@@ -14,9 +14,12 @@ dotenv.config();
 
 
 const app = express();
+// app.use(cors({
+//     origin: ["https://casatomas.onrender.com"],
+//     credentials: true
+// }));
 app.use(cors({
-    origin: ["https://casatomas.onrender.com"],
-    credentials: true
+    origin: `*`,
 }));
 app.use(morgan("dev"));
 app.use(express.json());
