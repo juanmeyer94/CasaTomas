@@ -26,6 +26,7 @@ const orderSchema = new mongoose.Schema({
   userName: String,
   userLastName: String,
   totalAmount: Number,
+  commentary: String,
   status: {
     type: String,
     optional: true,
