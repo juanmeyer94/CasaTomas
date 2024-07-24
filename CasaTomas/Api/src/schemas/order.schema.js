@@ -16,7 +16,8 @@ const orderItemSchema = z.object({
   ),
   _id: z.string(),
   quantity: z.number(),
-  colour: z.string().optional(),
+  colours: z.array(z.string()).optional(),
+  models: z.array(z.string()).optional(),
 });
 
 export const orderSchema = z.object({
