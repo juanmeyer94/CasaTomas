@@ -27,5 +27,6 @@ export const orderSchema = z.object({
   userLastName: z.string(),
   totalAmount: z.number(),
   status: z.string().optional(),
-  deleted: z.boolean().optional(), 
+  deleted: z.boolean().optional(),
+  commentary: z.string().optional(),
 });
