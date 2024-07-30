@@ -16,8 +16,8 @@ const orderItemSchema = z.object({
   ),
   _id: z.string(),
   quantity: z.number(),
-  colours: z.array(z.string()).optional(),
-  models: z.array(z.string()).optional(),
+  quantities: z.record(z.string(), z.number()).optional(),
+  commentary: z.string().optional(),
 });
 
 export const orderSchema = z.object({
@@ -28,5 +28,4 @@ export const orderSchema = z.object({
   totalAmount: z.number(),
   status: z.string().optional(),
   deleted: z.boolean().optional(),
-  commentary: z.string().optional(),
 });
