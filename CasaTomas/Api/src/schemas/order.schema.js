@@ -25,6 +25,7 @@ export const orderSchema = z.object({
   userEmail: z.string(),
   userName: z.string(),
   userLastName: z.string(),
+  cellphone: z.string(),
   totalAmount: z.number(),
   status: z.string().optional(),
   deleted: z.boolean().optional(),
