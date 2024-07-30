@@ -16,8 +16,8 @@ const orderItemSchema = new mongoose.Schema({
   ],
   _id: String,
   quantity: Number,
-  colours: [String],
-  models: [String]
+  quantities: { type: Map, of: Number, default: {} },
+  commentary: String,
 });
 
 const orderSchema = new mongoose.Schema({
@@ -25,8 +25,8 @@ const orderSchema = new mongoose.Schema({
   userEmail: String,
   userName: String,
   userLastName: String,
+  cellphone: String,
   totalAmount: Number,
-  commentary: String,
   status: {
     type: String,
     optional: true,
