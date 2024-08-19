@@ -18,11 +18,12 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
+    "modulename": "0.0.4",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.1",
     "morgan": "^1.10.0",
-    "zod": "^3.22.4",
-    "modulename":"0.0.4"
+    "multer": "^1.4.5-lts.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
