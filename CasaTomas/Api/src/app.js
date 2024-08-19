@@ -7,8 +7,9 @@ import router from "./Routes/auth.routes.js"
 import itemsRoutes from "./Routes/items.routes.js"
 import cloudinaryRoutes from "./Routes/cloudinary.routes.js";
 import orderRouter from "./Routes/order.routes.js";
+import contactRouter from "./Routes/contact.routes.js";
 import dotenv from "dotenv"
-import https from "https"
+
 
 dotenv.config();
 
@@ -28,6 +29,15 @@ app.use("/api",router);
 app.use("/api",itemsRoutes);
 app.use("/api", cloudinaryRoutes);
 app.use("/api", orderRouter)
+app.use("/api", contactRouter)
 
+
+// Endpoint de salud
+app.get('/api/health', (req, res) => {
+    res.status(200).json({
+        status: 200,
+        message: "Server is running"
+    });
+});
 
 export default app;

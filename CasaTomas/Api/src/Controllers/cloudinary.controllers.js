@@ -1,33 +1,53 @@
-import uploadImage from "cloudinary"
-import uploader from "cloudinary"
-
+import { cloudinary } from '../Cloudinary/Cloudinary.js';
 
 export const uploadImageCloud = async (req, res) => {
     try {
-        const imageUrl = await uploadImage(req.body.image);
-        res.send(imageUrl);
+        if (!req.file) {
+            return res.status(400).send("No se proporcionó ninguna imagen.");
+        }
+        const result = await new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream(
+                { resource_type: 'auto' },
+                (error, result) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    resolve(result);
+                }
+            ).end(req.file.buffer);
+        });
+
+        res.status(200).json({ url: result.secure_url });
     } catch (err) {
+        console.error(err);
         res.status(500).send(err.message || "Error interno del servidor");
     }
 };
 
-
-
+// Función para subir múltiples imágenes
 export const uploadMultipleImages = async (req, res) => {
     try {
-        if (!req.body.images || !Array.isArray(req.body.images)) {
-            return res.status(400).send("La propiedad 'images' debe ser un array en la solicitud.");
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).send('No files uploaded');
         }
 
-        const uploadPromises = req.body.images.map((image) => {
-            return uploader.upload(image);  
+        const uploadPromises = req.files.map(file => {
+            return new Promise((resolve, reject) => {
+                cloudinary.uploader.upload_stream(
+                    { resource_type: 'auto' },
+                    (error, result) => {
+                        if (error) {
+                            return reject(error);
+                        }
+                        resolve(result);
+                    }
+                ).end(file.buffer); 
+            });
         });
 
-        const uploadedResults = await Promise.all(uploadPromises);
-        const urls = uploadedResults.map((result) => result.url);
-
-        res.send(urls);
-    } catch (err) {
-        res.status(500).send(err.message || "Error interno del servidor");
+        const results = await Promise.all(uploadPromises);
+        res.status(200).json(results);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 };
