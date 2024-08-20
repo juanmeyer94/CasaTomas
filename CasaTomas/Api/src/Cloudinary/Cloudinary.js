@@ -1,8 +1,9 @@
 import { v2 as cloudinary } from 'cloudinary';
-
+import dotenv from "dotenv"
+dotenv.config();
 const cloud_name = `ddwq6af6j`;
 const api_key = `153439438484854`;
-const api_secret = `usfU9c6x_X_kjRUZvLBE-udtNGU`;
+const api_secret = process.env.VITE_CLOUDINARY_KEY;
 
 cloudinary.config({
   cloud_name: cloud_name,
