@@ -9,6 +9,7 @@ import cloudinaryRoutes from "./Routes/cloudinary.routes.js";
 import orderRouter from "./Routes/order.routes.js";
 import contactRouter from "./Routes/contact.routes.js";
 import dotenv from "dotenv"
+import pricesRoutes from "./Routes/priceList.routes.js";
 
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api",itemsRoutes);
 app.use("/api", cloudinaryRoutes);
 app.use("/api", orderRouter)
 app.use("/api", contactRouter)
+app.use("/api", pricesRoutes)
 
 
 // Endpoint de salud
