@@ -17,7 +17,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: ["http://localhost:5173", "https://casa-tomas-front.vercel.app"],
+    origin: ["http://localhost:5173", "https://casa-tomas-front.vercel.app", "https://www.casa-tomas.com", "https://casa-tomas.com"],
     credentials: true
 }));
 
