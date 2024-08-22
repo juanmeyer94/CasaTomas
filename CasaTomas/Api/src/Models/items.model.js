@@ -10,7 +10,8 @@ const itemSchema = new mongoose.Schema({
     description: String,
     specsTecs: String,
     colours: [String],
-    models: [String]
+    models: [String],
+    code: String
 });
 
 const dataSchema = new mongoose.Schema({

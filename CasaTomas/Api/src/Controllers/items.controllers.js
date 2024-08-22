@@ -1,4 +1,5 @@
 import ItemData from "../Models/items.model.js";
+import excelPriceList from "../Models/excelPriceList.model.js";
 
 
 export const getItems = async (req, res) => {
@@ -61,6 +62,30 @@ export const deleteItem = async (req, res) => {
         res.status(200).json({ message: "Item deleted successfully" });
     } catch (error) {
         console.error("Error al eliminar el item:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
+export const getItemsWithPrice = async (req, res) => {
+    try {
+        const items = await ItemData.find();
+        const priceList = await excelPriceList.find();
+
+        const itemsWithUpdatedPrices = items.map(item => {
+            item.data.items = item.data.items.map(product => {
+                const matchingPrice = priceList.find(priceEntry => priceEntry.id === parseInt(product.code));
+                if (matchingPrice) {
+                    product.price = matchingPrice.price;
+                }
+                return product;
+            });
+            return item;
+        });
+
+        res.json(itemsWithUpdatedPrices);
+    } catch (error) {
+        console.error("Error al obtener los ítems con precios:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
