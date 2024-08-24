@@ -12,6 +12,9 @@ const orderItemSchema = z.object({
       description: z.string().optional(),
       specsTecs: z.string().optional(),
       _id: z.string(),
+      colours: z.array(z.string()).optional(),
+      models: z.array(z.string()).optional(),
+      code: z.string().optional()
     })
   ),
   _id: z.string(),
