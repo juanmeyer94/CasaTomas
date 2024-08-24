@@ -1,4 +1,5 @@
 import Order from "../Models/order.model.js";
+import Counter from "../Models/counter.models.js"
 
 
 export const getOrders = async (req, res) => {
@@ -12,22 +13,31 @@ export const getOrders = async (req, res) => {
     }
 }
 
-export const createOrder = async (req, res) => {
+const getNextSequenceValue = async (sequenceName) => {
+    const sequenceDocument = await Counter.findByIdAndUpdate(
+      sequenceName,
+      { $inc: { sequence_value: 1 } },
+      { new: true, upsert: true }
+    );
+    return sequenceDocument.sequence_value;
+  };
+  
+  export const createOrder = async (req, res) => {
     try {
-        const newOrder = new Order(req.body);
-        const savedOrder = await newOrder.save();
-        res.status(200).json(savedOrder);
+      const orderNumber = await getNextSequenceValue("orderNumber");
+      const newOrder = new Order({ ...req.body, orderNumber });
+      const savedOrder = await newOrder.save();
+      res.status(200).json(savedOrder);
     } catch (error) {
-        if (error.name === 'ValidationError') {
-            res.status(400).json({ error: "Validation Error", details: error.errors });
-          } else {
-            res.status(500).json({ error: "Internal Server Error", message: error.message });
-          }
-          
-        console.error("Error al crear la orden: ", error);
-
+      if (error.name === 'ValidationError') {
+        res.status(400).json({ error: "Validation Error", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Internal Server Error", message: error.message });
+      }
+      console.error("Error al crear la orden: ", error);
     }
-}
+  };
+
 export const getOrder = async (req, res) => {
     try {
         const orderData = await Order.findById(req.params.id);

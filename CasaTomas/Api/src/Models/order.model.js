@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const orderItemSchema = new mongoose.Schema({
-  type: String,
+  type: { type: String, required: true },
   items: [
     {
       marca: String,
@@ -11,36 +11,43 @@ const orderItemSchema = new mongoose.Schema({
       summary: String,
       description: String,
       specsTecs: String,
-      _id: String,
+      _id: { type: String, required: true },
       colours: [String],
       models: [String],
-      code:String,
+      code: String,
+      section: String,
+      subsection: String,
+      offer: Boolean,
     },
   ],
-  _id: String,
-  quantity: Number,
-  quantities: { type: Map, of: Number, default: {} },
+  _id: { type: String, required: true },
+  quantity: { type: Map, of: Number },
+  quantities: {
+    type: Map,
+    of: new mongoose.Schema({
+      type: Map,
+      of: Number,
+    }),
+  }, 
   commentary: String,
 });
 
-const orderSchema = new mongoose.Schema({
-  orderItems: [orderItemSchema],
-  userEmail: String,
-  userName: String,
-  userLastName: String,
-  cellphone: String,
-  totalAmount: Number,
-  status: {
-    type: String,
-    optional: true,
+const orderSchema = new mongoose.Schema(
+  {
+    orderItems: [orderItemSchema],
+    userEmail: { type: String, required: true },
+    userName: { type: String, required: true },
+    userLastName: { type: String, required: true },
+    cellphone: { type: String, required: false },
+    totalAmount: { type: Number, default: 0 },
+    status: { type: String, default: "pendiente" },
+    deleted: { type: Boolean, default: false },
+    orderNumber: { type: Number, unique: true },
   },
-  deleted: {
-    type: Boolean,
-    default: false,
-  },
-}, {
-  timestamps: true,
-});
+  {
+    timestamps: true,
+  }
+);
 
 const OrderModel = mongoose.model("Order", orderSchema);
 
