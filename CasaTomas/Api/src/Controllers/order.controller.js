@@ -1,6 +1,4 @@
 import Order from "../Models/order.model.js";
-import Counter from "../Models/counter.models.js"
-
 
 export const getOrders = async (req, res) => {
     try {
@@ -13,18 +11,20 @@ export const getOrders = async (req, res) => {
     }
 }
 
-const getNextSequenceValue = async (sequenceName) => {
-    const sequenceDocument = await Counter.findByIdAndUpdate(
-      sequenceName,
-      { $inc: { sequence_value: 1 } },
-      { new: true, upsert: true }
-    );
-    return sequenceDocument.sequence_value;
+const getNextOrderNumber = async () => {
+    try {
+      const lastOrder = await Order.findOne().sort({ orderNumber: -1 }).exec();
+      
+      return lastOrder ? lastOrder.orderNumber + 1 : 1;
+    } catch (error) {
+      console.error("Error al obtener el próximo número de orden: ", error);
+      throw new Error("Error interno del servidor");
+    }
   };
   
   export const createOrder = async (req, res) => {
     try {
-      const orderNumber = await getNextSequenceValue("orderNumber");
+      const orderNumber = await getNextOrderNumber();
       const newOrder = new Order({ ...req.body, orderNumber });
       const savedOrder = await newOrder.save();
       res.status(200).json(savedOrder);

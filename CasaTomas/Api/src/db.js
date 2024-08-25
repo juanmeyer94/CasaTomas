@@ -1,6 +1,5 @@
-import mongoose from "mongoose"
-import dotenv from "dotenv"
-import Counter from "./Models/counter.models.js";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -9,12 +8,8 @@ export const connectDB = async () => {
 
     try {
         await mongoose.connect(URL);
-        await initializeCounters();
+        console.log("Conectado a MongoDB");
     } catch (error) {
-        console.error(error);
+        console.error("Error al conectar a MongoDB:", error);
     }
-};
-
-const initializeCounters = async () => {
-    await Counter.findByIdAndUpdate("orderNumber", { sequence_value: 0 }, { upsert: true });
 };
