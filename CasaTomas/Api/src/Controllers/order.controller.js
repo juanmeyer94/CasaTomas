@@ -1,4 +1,5 @@
 import Order from "../Models/order.model.js";
+import { sendOrderConfirmation } from "../Utils/nodemailer/transporter.js";
 
 export const getOrders = async (req, res) => {
     try {
@@ -24,9 +25,23 @@ const getNextOrderNumber = async () => {
   
   export const createOrder = async (req, res) => {
     try {
+      // Generar el siguiente número de orden
       const orderNumber = await getNextOrderNumber();
+  
+      // Crear y guardar la nueva orden
       const newOrder = new Order({ ...req.body, orderNumber });
       const savedOrder = await newOrder.save();
+  
+      // Intentar enviar el correo de confirmación
+      try {
+        await sendOrderConfirmation(savedOrder.userEmail, savedOrder);
+        console.log(`Correo de confirmación enviado a ${savedOrder.userEmail}`);
+      } catch (emailError) {
+        console.error('Error al enviar el correo de confirmación:', emailError);
+        // Puedes registrar el error o manejarlo según tu necesidad
+      }
+  
+      // Enviar la respuesta de éxito al cliente
       res.status(200).json(savedOrder);
     } catch (error) {
       if (error.name === 'ValidationError') {
