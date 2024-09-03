@@ -10,10 +10,10 @@ export const uploadImageCloud = async (req, res) => {
             resource_type: 'auto', 
             transformation: [
                 {
-                    width: 500,
-                    height: 500,
+                    width: 750,
+                    height: 750,
                     crop: 'limit', 
-                    quality: 'auto', 
+                    quality: 'auto:best', 
                     fetch_format: 'auto'
                 }
             ]
