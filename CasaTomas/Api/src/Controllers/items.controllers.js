@@ -74,7 +74,7 @@ export const getItemsWithPrice = async (req, res) => {
 
         const itemsWithUpdatedPrices = items.map(item => {
             item.data.items = item.data.items.map(product => {
-                const matchingPrice = priceList.find(priceEntry => priceEntry.id === parseInt(product.code));
+                const matchingPrice = priceList.find(priceEntry => priceEntry.id === product.code);
                 if (matchingPrice) {
                     product.price = matchingPrice.price;
                 }

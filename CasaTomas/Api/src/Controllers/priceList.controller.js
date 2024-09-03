@@ -1,8 +1,8 @@
-import {updatePrices, getGoogleSheetData} from "../libs/googleSheetsData.js";
+import {updatePrices, getAllSheetsData} from "../libs/googleSheetsData.js";
 
 export const getPricesController = async (req, res) => {
     try {
-        const rows = await getGoogleSheetData();
+        const rows = await getAllSheetsData();
         res.status(200).json({ data: rows });
     } catch (error) {
         console.error(error);
