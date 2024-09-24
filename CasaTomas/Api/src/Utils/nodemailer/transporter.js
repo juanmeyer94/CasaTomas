@@ -3,47 +3,78 @@
 import transporter from "./nodemailer.js";
 
 const generateOrderSummary = (order) => {
-  let summary = `<h2>Resumen de Pedido</h2>`;
-  summary += `<p><strong>Nombre:</strong> ${order.userName} ${order.userLastName}</p>`;
-  summary += `<p><strong>Email:</strong> ${order.userEmail}</p>`;
-  summary += `<p><strong>Teléfono:</strong> ${order.cellphone}</p>`;
-  summary += `<p><strong>Número de Orden:</strong> ${order.orderNumber}</p>`;
-  summary += `<p><strong>Estado:</strong> ${order.status}</p>`;
-  summary += `<h3>Detalles del Pedido:</h3>`;
+  let summary = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd;">
+      <!-- Encabezado con imagen -->
+      <div style="text-align: center;">
+        <img src="https://res.cloudinary.com/ddwq6af6j/image/upload/f_auto,q_auto/dodqzwqrtkxyhqunhuwt" alt="Casa Tomas" style="max-width: 100%; height: auto;" />
+      </div>
+
+      <!-- Saludo personalizado -->
+      <h1 style="text-align: center; color: #333;">Hola, ${order.userName}!</h1>
+      <p style="text-align: center; color: #777;">Este es tu pedido:</p>
+
+      <!-- Detalles del pedido -->
+      <div style="margin: 20px 0;">
+  `;
+
+  let totalOrderPrice = 0; 
+
 
   order.orderItems.forEach((itemType, index) => {
     itemType.items.forEach(item => {
-      summary += `<div style="margin-bottom: 20px;">`;
-      summary += `<p><strong>Marca:</strong> ${item.marca}</p>`;
-      summary += `<p><strong>Resumen:</strong> ${item.summary}</p>`;
-      summary += `<p><strong>Descripción:</strong> ${item.description}</p>`;
-      summary += `<p><strong>Precio unitario:</strong> $${item.price}</p>`;
-      if (item.photo.length > 0) {
-        summary += `<p><strong>Imagen:</strong> 
-        <br/>
-        <img src="${item.photo[0]}" alt="${item.marca}" style="width: 100px; height: auto;" /></p>`;
-      }
-      summary += `<p><strong>Cantidades:</strong></p>`;
-      
-      // Corregir el formato de las cantidades
-      if (itemType.quantity instanceof Map) {
-        itemType.quantity.forEach((value, key) => {
-          summary += `<p>${key}: ${value}</p>`;
-        });
-      } else {
-        Object.keys(itemType.quantity).forEach(colorOrModel => {
-          summary += `<p>${colorOrModel}: ${itemType.quantity[colorOrModel]}</p>`;
-        });
-      }
+      summary += `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; padding: 10px 0; border-bottom: 1px solid #eee;">
+          <div style="flex: 1; margin-right: 20px;">
+            <img src="${item.photo[0]}" alt="${item.marca}" style="width: 100px; height: auto; border-radius: 8px;" />
+          </div>
+          <div style="flex: 3;">
+            <h3 style="margin: 0; color: #333;">${item.summary}</h3>
+            <p style="margin: 5px 0; color: #777;">${item.description}</p>
+            <p style="font-weight: bold; color: #333;">$${item.price}</p>
+          </div>
+        </div>
+      `;
 
-      summary += `</div>`;
+      if (itemType.quantity) {
+        summary += `<div><strong>Cantidades:</strong>`;
+        
+        if (itemType.quantity instanceof Map) {
+          itemType.quantity.forEach((value, key) => {
+            const itemTotalPrice = value * item.price;
+            totalOrderPrice += itemTotalPrice; 
+            summary += `<p>${key}: ${value} x $${item.price} = $${itemTotalPrice.toFixed(2)}</p>`;
+          });
+        } else {
+          Object.keys(itemType.quantity).forEach(colorOrModel => {
+            const itemTotalPrice = itemType.quantity[colorOrModel] * item.price;
+            totalOrderPrice += itemTotalPrice;
+            summary += `<p>${colorOrModel}: ${itemType.quantity[colorOrModel]} x $${item.price} = $${itemTotalPrice.toFixed(2)}</p>`;
+          });
+        }
+        
+        summary += `</div>`;
+      }
     });
-
-    // Agregar divisor si hay más de un item
     if (index < order.orderItems.length - 1) {
       summary += `<hr style="border-top: 1px solid #ccc; margin: 20px 0;" />`;
     }
   });
+
+  summary += `
+      </div>
+      <div style="text-align: right; margin-top: 20px;">
+        <h2 style="color: #333;">TOTAL: $${totalOrderPrice.toFixed(2)}</h2>
+      </div>
+
+      <!-- Mensaje de cierre -->
+      <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <h3 style="color: #333;">¡PRONTO NOS COMUNICAREMOS!</h3>
+        <p style="color: #777;">Muchas gracias por contar con nosotros.</p>
+        <p style="color: #777;">San Martin 556<br>3492-279892<br>Casa Tomas - Rafaela</p>
+      </div>
+    </div>
+  `;
 
   return summary;
 };
