@@ -1,5 +1,3 @@
-// utils/sendOrderConfirmation.js
-
 import transporter from "./nodemailer.js";
 
 const generateOrderSummary = (order) => {
@@ -79,6 +77,9 @@ const generateOrderSummary = (order) => {
   return summary;
 };
 
+
+
+
 export const sendOrderConfirmation = (userEmail, order) => {
   const mailOptions = {
     from: 'casatomas.rafaela@yahoo.com.ar',
@@ -89,3 +90,4 @@ export const sendOrderConfirmation = (userEmail, order) => {
 
   return transporter.sendMail(mailOptions);
 };
+
