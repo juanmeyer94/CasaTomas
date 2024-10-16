@@ -11,7 +11,9 @@ const itemSchema = new mongoose.Schema({
     specsTecs: String,
     colours: [String],
     models: [String],
-    code: String
+    code: String,
+    quantity: String,
+    wholesalePrice: String,
 });
 
 const dataSchema = new mongoose.Schema({
