@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 
-const excelPrice = new mongoose.Schema({
+const excelPriceSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
-    price: { type: String, required: true }
-})
+    price: { type: String, required: true },
+    quantity: { type: String }, 
+    wholesalePrice: { type: String}
+});
 
-const excelPriceList = mongoose.model("excelPriceList", excelPrice);
-export default excelPriceList
+const excelPriceList = mongoose.model("excelPriceList", excelPriceSchema);
+export default excelPriceList;

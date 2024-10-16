@@ -10,7 +10,9 @@ const itemSchema = z.object({
     specsTecs: z.string().optional(),
     colours: z.array(z.string()).optional(),
     models: z.array(z.string()).optional(),
-    code: z.string().optional()
+    code: z.string().optional(),
+    quantity: z.string().optional(),
+    wholesalePrice: z.string().optional(),
   });
   
 
