@@ -15,15 +15,57 @@ export const getItems = async (req, res) => {
 
 export const createItem = async (req, res) => {
     try {
-        const newItemData = new ItemData(req.body);
-        const savedItemData = await newItemData.save();
+        const newItemData = req.body;
+        const priceList = await excelPriceList.find().lean();
+        const priceMap = new Map(priceList.map(price => [price.id, price]));
+
+        if (newItemData.data && newItemData.data.items) {
+            newItemData.data.items = newItemData.data.items.map(product => {
+                if (product.code) {
+                    const matchingPrice = priceMap.get(product.code);
+                    if (matchingPrice) {
+                        product.price = matchingPrice.price;
+                        product.wholesalePrice = matchingPrice.wholesalePrice;
+                        product.quantity = matchingPrice.quantity;
+                    } else {
+                        console.log(`No se encontró precio para el producto ${product.code}`);
+                    }
+                } else {
+                    console.log("Producto sin código:", JSON.stringify(product));
+                }
+                return product;
+            });
+        }
+
+        const savedItemData = await ItemData.create(newItemData);
         res.status(201).json(savedItemData);
     } catch (error) {
         console.error("Error al crear el item:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: "Error Interno del Servidor", detalles: error.message });
     }
 };
 
+export const updateFilterStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { filter } = req.body;
+
+        const updatedItem = await ItemData.findByIdAndUpdate(
+            id,
+            { filter: filter },
+            { new: true }
+        );
+
+        if (!updatedItem) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        res.json(updatedItem);
+    } catch (error) {
+        console.error("Error updating filter status:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
 
 export const getItem = async (req, res) => {
     try {
@@ -62,31 +104,6 @@ export const deleteItem = async (req, res) => {
         res.status(200).json({ message: "Item deleted successfully" });
     } catch (error) {
         console.error("Error al eliminar el item:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
-};
-
-
-export const getItemsWithPrice = async (req, res) => {
-    try {
-        const items = await ItemData.find();
-        const priceList = await excelPriceList.find();
-
-        const itemsWithUpdatedPrices = items.map(item => {
-            item.data.items = item.data.items.map(product => {
-                const matchingPrice = priceList.find(priceEntry => priceEntry.id === product.code);
-                console.log(matchingPrice)
-                if (matchingPrice) {
-                    product.price = matchingPrice.price;
-                }
-                return product;
-            });
-            return item;
-        });
-
-        res.json(itemsWithUpdatedPrices);
-    } catch (error) {
-        console.error("Error al obtener los ítems con precios:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };

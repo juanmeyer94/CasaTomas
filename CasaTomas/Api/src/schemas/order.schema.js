@@ -18,14 +18,16 @@ const orderItemSchema = z.object({
       section: z.string().optional(),
       subsection: z.string().optional(),
       offer: z.boolean().optional(),
+      quantity: z.string().optional(),
+      wholesalePrice: z.string().optional(),
     })
   ),
   _id: z.string(),
-  quantity: z.record(z.string(), z.number()), // Modificado para manejar un objeto
+  quantity: z.record(z.string(), z.number()), 
   quantities: z.record(
     z.string(),
     z.record(z.string(), z.number())
-  ).optional(), // Modificado para manejar la estructura anidada
+  ).optional(),
   commentary: z.string().optional(),
 });
 
@@ -35,7 +37,7 @@ export const orderSchema = z.object({
   userName: z.string(),
   userLastName: z.string(),
   cellphone: z.string(),
-  totalAmount: z.number().nullable(), // Puede ser nulo
+  totalAmount: z.number().nullable(), 
   status: z.string().optional(),
   deleted: z.boolean().optional(),
   orderNumber: z.number().optional() 
