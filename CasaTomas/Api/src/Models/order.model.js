@@ -18,6 +18,8 @@ const orderItemSchema = new mongoose.Schema({
       section: String,
       subsection: String,
       offer: Boolean,
+      quantity: String,
+    wholesalePrice: String,
     },
   ],
   _id: { type: String, required: true },

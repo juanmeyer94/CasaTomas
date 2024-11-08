@@ -1,6 +1,6 @@
 import express from "express";
 import { authRequired } from "../middleware/validateToken.js";
-import { getItems, getItem, createItem, updateItem, deleteItem, getItemsWithPrice } from "../Controllers/items.controllers.js";
+import { getItems, getItem, createItem, updateItem, deleteItem, updateFilterStatus } from "../Controllers/items.controllers.js";
 
 import { validateSchema } from "../middleware/validateSchema.js";
 import { itemDataSchema } from "../schemas/items.schema.js";
@@ -10,10 +10,10 @@ const router = express.Router();
 
 router.get("/items", getItems);
 
-router.get("/itemswithprices", getItemsWithPrice)
 
 router.post("/items", validateSchema(itemDataSchema),createItem);
 
+router.put("/showhideitem/:id", updateFilterStatus);
 
 router.get("/items/:id", getItem);
 
