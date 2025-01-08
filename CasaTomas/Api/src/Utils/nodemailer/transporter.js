@@ -1,9 +1,35 @@
-// utils/sendOrderConfirmation.js
-
 import transporter from "./nodemailer.js";
 
-const generateOrderSummary = (order) => {
-  console.log("enviando nodemailer")
+const formatArgentinePrice = (price) => {
+  const roundedPrice = Math.round(price);
+
+  return new Intl.NumberFormat('es-AR', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(roundedPrice);
+};
+
+const formatDescription = (description) => {
+  if (!description) return '';
+
+  const formattedText = description
+    .split('/*')
+    .map(line => line.trim())
+    .filter(line => line.length > 0)
+    .map((line, index) => index === 0 ? line : `• ${line}`)
+    .join('<br>');
+
+  const sections = formattedText
+    .split('//')
+    .map(section => section.trim())
+    .filter(section => section.length > 0)
+    .join('<br><br>');
+
+  return sections;
+};
+
+const generateOrderSummary = async (order) => {
+
   let summary = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd;">
       <!-- Encabezado con imagen -->
@@ -19,11 +45,53 @@ const generateOrderSummary = (order) => {
       <div style="margin: 20px 0;">
   `;
 
-  let totalOrderPrice = 0; 
+  let totalOrderPrice = 0;
+  let totalSavings = 0;
 
+  for (const itemType of order.orderItems) {
+    for (const item of itemType.items) {
 
-  order.orderItems.forEach((itemType, index) => {
-    itemType.items.forEach(item => {
+      let regularPrice = parseFloat(item.price);
+      let discountedPrice = regularPrice;
+      let discountMessage = '';
+
+      let totalQuantity = 0;
+      if (itemType.quantity instanceof Map) {
+        for (const quantity of itemType.quantity.values()) {
+          totalQuantity += quantity;
+        }
+      } else if (typeof itemType.quantity === 'object') {
+        totalQuantity = Object.values(itemType.quantity).reduce((sum, qty) => sum + qty, 0);
+      }
+
+      if (item.wholesalePrice && item.wholesalePrice !== "0" && item.quantity) {
+        const minQuantityForWholesale = parseInt(item.quantity.split(' ')[0]);
+        const wholesalePrice = parseFloat(item.wholesalePrice);
+        const wholesaleUnitPrice = wholesalePrice / minQuantityForWholesale;
+
+        if (totalQuantity >= minQuantityForWholesale) {
+          discountedPrice = wholesaleUnitPrice;
+          const savings = (regularPrice - wholesaleUnitPrice) * totalQuantity;
+          totalSavings += savings;
+
+          discountMessage = `
+            <div style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border-radius: 4px;">
+              <p style="color: #666; text-decoration: line-through; margin: 0;">
+                Precio regular: $${formatArgentinePrice(regularPrice)}
+              </p>
+              <p style="color: #2b8a3e; font-weight: bold; margin: 5px 0;">
+                Precio mayorista: $${formatArgentinePrice(discountedPrice)}
+              </p>
+              <p style="color: #2b8a3e; font-size: 0.9em; margin: 0;">
+                ¡Ahorrás $${formatArgentinePrice(savings)} en este producto!
+              </p>
+            </div>
+          `;
+        }
+      }
+
+      const formattedDescription = formatDescription(item.description);
+
       summary += `
         <div style="display: flex; justify-content: space-between; margin-bottom: 20px; padding: 10px 0; border-bottom: 1px solid #eee;">
           <div style="flex: 1; margin-right: 20px;">
@@ -31,41 +99,41 @@ const generateOrderSummary = (order) => {
           </div>
           <div style="flex: 3;">
             <h3 style="margin: 0; color: #333;">${item.summary}</h3>
-            <p style="margin: 5px 0; color: #777;">${item.description}</p>
-            <p style="font-weight: bold; color: #333;">$${item.price}</p>
+            <p style="margin: 5px 0; color: #777; line-height: 1.5;">${formattedDescription}</p>
+            ${discountMessage}
           </div>
         </div>
       `;
 
-      if (itemType.quantity) {
-        summary += `<div><strong>Cantidades:</strong>`;
-        
-        if (itemType.quantity instanceof Map) {
-          itemType.quantity.forEach((value, key) => {
-            const itemTotalPrice = value * item.price;
-            totalOrderPrice += itemTotalPrice; 
-            summary += `<p>${key}: ${value} x $${item.price} = $${itemTotalPrice.toFixed(2)}</p>`;
-          });
-        } else {
-          Object.keys(itemType.quantity).forEach(colorOrModel => {
-            const itemTotalPrice = itemType.quantity[colorOrModel] * item.price;
-            totalOrderPrice += itemTotalPrice;
-            summary += `<p>${colorOrModel}: ${itemType.quantity[colorOrModel]} x $${item.price} = $${itemTotalPrice.toFixed(2)}</p>`;
-          });
+      summary += `<div><strong>Cantidades:</strong>`;
+
+      if (itemType.quantity instanceof Map) {
+        for (const [colorOrModel, quantity] of itemType.quantity.entries()) {
+          const itemTotalPrice = quantity * discountedPrice;
+          totalOrderPrice += itemTotalPrice;
+          summary += `<p>${colorOrModel}: ${quantity} x $${formatArgentinePrice(discountedPrice)} = $${formatArgentinePrice(itemTotalPrice)}</p>`;
         }
-        
-        summary += `</div>`;
+      } else if (typeof itemType.quantity === 'object') {
+        Object.entries(itemType.quantity).forEach(([colorOrModel, quantity]) => {
+          const itemTotalPrice = quantity * discountedPrice;
+          totalOrderPrice += itemTotalPrice;
+          summary += `<p>${colorOrModel}: ${quantity} x $${formatArgentinePrice(discountedPrice)} = $${formatArgentinePrice(itemTotalPrice)}</p>`;
+        });
       }
-    });
-    if (index < order.orderItems.length - 1) {
-      summary += `<hr style="border-top: 1px solid #ccc; margin: 20px 0;" />`;
+
+      summary += `</div>`;
     }
-  });
+  }
 
   summary += `
       </div>
-      <div style="text-align: right; margin-top: 20px;">
-        <h2 style="color: #333;">TOTAL: $${totalOrderPrice.toFixed(2)}</h2>
+      <div style="text-align: right; margin: 20px 0; padding: 15px; background-color: #f8f9fa; border-radius: 4px;">
+        ${totalSavings > 0 ? `
+          <p style="color: #2b8a3e; margin: 0 0 10px 0;">
+            ¡Ahorro total en tu compra: $${formatArgentinePrice(totalSavings)}!
+          </p>
+        ` : ''}
+        <h2 style="color: #333; margin: 0;">TOTAL: $${formatArgentinePrice(totalOrderPrice)}</h2>
       </div>
 
       <!-- Mensaje de cierre -->
@@ -80,17 +148,35 @@ const generateOrderSummary = (order) => {
   return summary;
 };
 
-
-
-
-export const sendOrderConfirmation = (userEmail, order) => {
+export const sendAllNotifications = async (userEmail, order) => {
   const mailOptions = {
     from: 'casatomas.rafaela@yahoo.com.ar',
     to: userEmail,
     subject: `Confirmación de Pedido #${order.orderNumber}`,
-    html: generateOrderSummary(order),
+    html: await generateOrderSummary(order),
   };
 
   return transporter.sendMail(mailOptions);
+};
+
+export const sendNewOrderNotification = async (order) => {
+  const mailOptions = {
+    from: 'casatomas.rafaela@yahoo.com.ar',
+    to: 'julietamtomas@gmail.com',
+    subject: `Nuevo Pedido Recibido #${order.orderNumber}`,
+    html: await generateOrderSummary(order),
+  };
+
+  return transporter.sendMail(mailOptions);
+};
+
+export const sendOrderConfirmation = async (userEmail, order) => {
+  try {
+    await sendAllNotifications(userEmail, order);
+    await sendNewOrderNotification(order);
+  } catch (error) {
+    console.error('Error sending notifications:', error);
+    throw error;
+  }
 };
 
