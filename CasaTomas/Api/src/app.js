@@ -11,6 +11,7 @@ import contactRouter from "./Routes/contact.routes.js";
 import dotenv from "dotenv"
 import pricesRoutes from "./Routes/priceList.routes.js";
 import nodemailerRouter from "./Routes/nodemailer.routes.js";
+import sitemapRouter from "./Utils/DynamicSitemap/dynamicSitemap.js"
 
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+app.use("/", sitemapRouter)
 app.use("/api",router);
 app.use("/api",itemsRoutes);
 app.use("/api", cloudinaryRoutes);
