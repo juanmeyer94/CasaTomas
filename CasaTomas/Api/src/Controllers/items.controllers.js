@@ -1,5 +1,8 @@
 import ItemData from "../Models/items.model.js";
-import excelPriceList from "../Models/excelPriceList.model.js";
+import excelPriceList from "../Models/excelPriceList.model.js"; 
+import { SitemapStream, streamToPromise } from "sitemap"
+import { Readable } from "stream"
+
 
 
 export const getItems = async (req, res) => {
@@ -11,6 +14,106 @@ export const getItems = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+export const siteMapFunc = async (req, res) => {
+    console.log("Se utilizó el sitemaROuter")
+    try {
+        const baseUrl = "https://www.casa-tomas.com";
+        const productos = await ItemData.find();
+
+        let urls = [];
+        urls.push(`${baseUrl}/api/productos`);
+
+        productos.forEach((producto) => {
+            const { section, subsection, data } = producto;
+
+            if (section) urls.push(`${baseUrl}/productos/${section.replace(/ /g, "-")}`);
+            if (subsection) urls.push(`${baseUrl}/productos/${section.replace(/ /g, "-")}/${subsection.replace(/ /g, "-")}`);
+
+            if (data && data.items) {
+                data.items.forEach((item) => {
+                    if (item.marca) {
+                        urls.push(`${baseUrl}/productos/${section.replace(/ /g, "-")}/${subsection.replace(/ /g, "-")}/${item.marca.replace(/ /g, "-")}`);
+                    }
+                });
+            }
+        });
+
+        // Eliminar duplicados
+        urls = [...new Set(urls)];
+
+        // Crear XML
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+        urls.forEach((url) => {
+            xml += `   <url>\n      <loc>${url}</loc>\n      <changefreq>daily</changefreq>\n      <priority>0.8</priority>\n   </url>\n`;
+        });
+        xml += `</urlset>`;
+
+        res.header("Content-Type", "application/xml");
+        res.send(xml);
+    } catch (error) {
+        console.error("Error generando sitemap:", error);
+        res.status(500).send("Error generando sitemap");
+    }
+}
+
+export async function generateSitemap(req) {
+    try {
+      // Obtener todos los items
+      const items = await ItemData.find({})
+  
+      // Crear stream del sitemap
+      const stream = new SitemapStream({ hostname: `https://${req.get("host")}` })
+  
+      // Añadir URLs estáticas
+      stream.write({ url: "/", changefreq: "daily", priority: 1 })
+      stream.write({ url: "/about", changefreq: "monthly", priority: 0.8 })
+      stream.write({ url: "/contact", changefreq: "monthly", priority: 0.8 })
+  
+      // Añadir URLs dinámicas basadas en los items
+      items.forEach((item) => {
+        stream.write({
+          url: `/items/${item.section}/${item.subsection}/${item._id}`,
+          changefreq: "weekly",
+          priority: 0.7,
+        })
+      })
+  
+      // Finalizar el stream
+      stream.end()
+  
+      // Convertir el stream a una promesa que resuelve con el XML
+      const sitemapXml = await streamToPromise(Readable.from(stream))
+      return sitemapXml
+    } catch (error) {
+      console.error("Error generando el sitemap:", error)
+      throw error
+    }
+  }
+
+export const getFilteredItems = async (req, res) => {
+    try {
+        const { section, subsection, type, marca } = req.params;
+
+        let query = {};
+        if (section) query.section = section.replace(/-/g, " ");
+        if (subsection) query.subsection = subsection.replace(/-/g, " ");
+        if (type) query["data.type"] = type.replace(/-/g, " ");
+        if (marca) query["data.items.marca"] = marca.replace(/-/g, " ");
+
+        const items = await ItemData.find(query);
+
+        if (!items.length) {
+            return res.status(404).json({ message: "No se encontraron productos" });
+        }
+
+        res.json(items);
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+        res.status(500).json({ message: "Error en el servidor" });
+    }
+};
+
 
 
 export const createItem = async (req, res) => {
