@@ -148,6 +148,55 @@ const generateOrderSummary = async (order) => {
   return summary;
 };
 
+{ /* contactSchema from mongoDB
+  
+  {
+  "_id": {
+    "$oid": "67f9462292f3788a1a8a3e44"
+  },
+  "userName": "Hhhh uhhh",
+  "userEmail": "julietamtomas@gmail.com",
+  "userPhone": "349236458",
+  "userMessage": "Stsyzyyzhz",
+  "userLocation": "Hshshss jsjs",
+  "timestamp": {
+    "$date": "2025-04-11T16:41:06.227Z"
+  },
+  "__v": 0
+}
+  
+  */}
+
+const generateContactMessage = async (contactMessage) => {
+  console.log(contactMessage)
+  return `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ddd;">
+      <h1 style="text-align: center; color: #333;">Nuevo Mensaje de Contacto</h1>
+      <p style="color: #777;">Detalles del contacto:</p>
+      <p><strong>Nombre:</strong> ${contactMessage.userName}</p>
+      <p><strong>Email:</strong> ${contactMessage.userEmail}</p>
+      <p><strong>Teléfono:</strong> ${contactMessage.userPhone}</p>
+      <p><strong>Mensaje:</strong> ${contactMessage.userMessage}</p>
+      <p><strong>Ubicación:</strong> ${contactMessage.userLocation}</p>
+      <p><strong>Fecha y Hora:</strong> ${new Date(contactMessage.timestamp).toLocaleString()}</p>
+      <p style="color: #777;">Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.</p>
+      <p style="color: #777;">Casa Tomas - Rafaela</p>  
+    </div>
+  `;
+}
+
+export const sendContactNotification = async (title, contact, contactMessage) => {
+  console.log(contact)
+  const mailOptions = {
+    from: 'casatomas.rafaela@yahoo.com.ar',
+    to: contact,
+    subject: title,
+    html: await generateContactMessage(contactMessage),
+  };
+  return transporter.sendMail(mailOptions);
+
+}
+
 export const sendAllNotifications = async (userEmail, order) => {
   const mailOptions = {
     from: 'casatomas.rafaela@yahoo.com.ar',
