@@ -15,41 +15,45 @@ export const getOrders = async (req, res) => {
 const getNextOrderNumber = async () => {
     try {
       const lastOrder = await Order.findOne().sort({ orderNumber: -1 }).exec();
-      
+
       return lastOrder ? lastOrder.orderNumber + 1 : 1;
     } catch (error) {
       console.error("Error al obtener el próximo número de orden: ", error);
       throw new Error("Error interno del servidor");
     }
   };
-  
+
   export const createOrder = async (req, res) => {
     try {
       // Generar el siguiente número de orden
       const orderNumber = await getNextOrderNumber();
-  
+
       // Crear y guardar la nueva orden
       const newOrder = new Order({ ...req.body, orderNumber });
       const savedOrder = await newOrder.save();
-  
-      // Intentar enviar el correo de confirmación
+
+      // Enviar correo solo si el email es válido
+      const userEmail = savedOrder.userEmail;
+      const isValidEmail = userEmail && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(userEmail);
       try {
-        await sendOrderConfirmation(savedOrder.userEmail, savedOrder);
-        console.log(`Correo de confirmación enviado a ${savedOrder.userEmail}`);
+        if (isValidEmail) {
+          await sendOrderConfirmation(userEmail, savedOrder);
+          console.log(`Correo de confirmación enviado a ${userEmail}`);
+        } else {
+          // Solo aviso a los dueños
+          await sendOrderConfirmation("noresponder@gmail.com", savedOrder);
+          console.log('Correo de aviso enviado solo a los dueños (sin email de usuario)');
+        }
       } catch (emailError) {
         console.error('Error al enviar el correo de confirmación:', emailError);
-        // Puedes registrar el error o manejarlo según tu necesidad
       }
-  
-      // Enviar la respuesta de éxito al cliente
-      res.status(200).json(savedOrder);
+      res.status(201).json(savedOrder);
     } catch (error) {
+      console.error('Error al crear la orden:', error);
       if (error.name === 'ValidationError') {
-        res.status(400).json({ error: "Validation Error", details: error.errors });
-      } else {
-        res.status(500).json({ error: "Internal Server Error", message: error.message });
+        return res.status(400).json({ error: 'Validation Error', details: error.errors });
       }
-      console.error("Error al crear la orden: ", error);
+      res.status(500).json({ error: 'Internal Server Error', message: error.message });
     }
   };
 
@@ -73,7 +77,7 @@ export const updateOrderStatus = async (req, res) => {
         if (!updatedOrder) {
             return res.status(404).json({ message: "Order not found" })
         }
-        
+
         res.json(updatedOrder);
     } catch (error) {
         console.error("Error al actualizar la orden:", error);

@@ -30,17 +30,17 @@ const orderItemSchema = new mongoose.Schema({
       type: Map,
       of: Number,
     }),
-  }, 
+  },
   commentary: String,
 });
 
 const orderSchema = new mongoose.Schema(
   {
     orderItems: [orderItemSchema],
-    userEmail: { type: String, required: true },
+    userEmail: { type: String, required: false },
     userName: { type: String, required: true },
     userLastName: { type: String, required: true },
-    cellphone: { type: String, required: false },
+    cellphone: { type: String, required: true },
     totalAmount: { type: Number, default: 0 },
     status: { type: String, default: "pendiente" },
     deleted: { type: Boolean, default: false },

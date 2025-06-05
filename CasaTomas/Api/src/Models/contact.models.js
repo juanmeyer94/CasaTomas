@@ -9,6 +9,11 @@ const contactSchema = new mongoose.Schema({
     timestamp: {
         type: Date,
         default: Date.now
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'in-progress', 'resolved', 'closed'],
+        default: 'pending'
     }
 })
 
