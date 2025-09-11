@@ -42,7 +42,18 @@ export async function getAllSheetsData() {
             ];
         });
 
-        const listaWebData = await getGoogleSheetData(listaWebSheetId, 'LISTAWEB!A3:C406');
+        const listaWebDataAtoC = await getGoogleSheetData(listaWebSheetId, 'LISTAWEB!A3:C406');
+        const listaWebDataGtoH = await getGoogleSheetData(listaWebSheetId, 'LISTAWEB!G3:H406');
+
+        const listaWebData = listaWebDataAtoC.map((row, index) => {
+            return [
+                row[0], 
+                row[1], 
+                row[2], 
+                listaWebDataGtoH[index] ? listaWebDataGtoH[index][0] : null, 
+                listaWebDataGtoH[index] ? listaWebDataGtoH[index][1] : null 
+            ];
+        });
         return { merceriaData, listaWebData }; 
     } catch (error) {
         console.error('Error fetching data from Google Sheets:', error);
@@ -94,12 +105,16 @@ export async function updatePrices() {
         const listaWebPromises = listaWebData.map(async row => {
             const id = row[0]; 
             const price = row[2]?.trim() || "0";
-            const quantity ="0";
-            const wholesalePrice ="0";
+            const quantity = row[3]?.trim() || "0";
+            const wholesalePrice = row[4]?.trim() || "0";
 
             await excelPriceList.findOneAndUpdate(
                 { id: id }, 
-                { price: price }, 
+                { 
+                    price: price,
+                    quantity: quantity,
+                    wholesalePrice: wholesalePrice
+                }, 
                 { upsert: true, new: true }
             );
 
